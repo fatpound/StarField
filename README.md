@@ -13,7 +13,7 @@ Install Game Programming with C++ workload.\
 Open Visual Studio.\
 Clone the repo to Visual Studio.\
 Select "Show All Files" in the Solution Explorer window. (Optional)\
-Then you can build the project. (Select Release, not Debug.)
+Then you can build the project. (Select Release, not Debug)
 
 About The Project
 -----------------
