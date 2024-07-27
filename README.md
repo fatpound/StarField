@@ -17,7 +17,7 @@ Then you can build the project. (Select Release, not Debug)
 
 About The Project
 -----------------
-Just like StarRealm, the stars rotate too but this time transformation matrices are reordered for some visual feast...\
+Just like StarRealm, the stars rotate too but this time transformation matrices are reordered for some visual feast.\
 Hold left mouse click to navigate through in the space.\
 Use the mouse wheel to zoom in or out.\
 Press Q or E to rotate the camera for even more fun.\
