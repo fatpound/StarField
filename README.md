@@ -8,7 +8,8 @@ Building
 --------
 Install the latest version of Visual Studio 2022.\
 Install the Desktop development with C++ workload in Visual Studio Installer along with\
-the experimental Modules support\
+the experimental Modules support.\
+Install Game Programming with C++ workload.\
 Open Visual Studio.\
 Clone the repo to Visual Studio.\
 Select "Show All Files" in the Solution Explorer window. (Optional)\
