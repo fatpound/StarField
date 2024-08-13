@@ -40,7 +40,8 @@ export namespace fatpound::win32::d2d
         void BeginFrame();
         void EndFrame();
 
-        void DrawLine(const D2D1_POINT_2F& p0, const D2D1_POINT_2F& p1, [[maybe_unused]] const D2D1_COLOR_F& color);
+        void DrawLine(const D2D1_POINT_2F& p0, const D2D1_POINT_2F& p1);
+        void DrawLine(const D2D1_POINT_2F& p0, const D2D1_POINT_2F& p1, const D2D1_COLOR_F& color);
 
         void DrawClosedPolyLine(const std::vector<DirectX::XMFLOAT2>& vertices, const D2D1_COLOR_F& color);
         void DrawClosedPolyLine(const std::vector<DirectX::XMFLOAT2>& vertices, const D2D1_COLOR_F& color, DirectX::XMMATRIX transform);

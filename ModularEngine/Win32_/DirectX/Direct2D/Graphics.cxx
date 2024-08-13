@@ -59,8 +59,14 @@ namespace fatpound::win32::d2d
         pRenderTarget_->EndDraw();
     }
 
-    void Graphics::DrawLine(const D2D1_POINT_2F& p0, const D2D1_POINT_2F& p1, [[maybe_unused]] const D2D1_COLOR_F& color)
+    void Graphics::DrawLine(const D2D1_POINT_2F& p0, const D2D1_POINT_2F& p1)
     {
+        pRenderTarget_->DrawLine(p0, p1, pBrush_.Get());
+    }
+    void Graphics::DrawLine(const D2D1_POINT_2F& p0, const D2D1_POINT_2F& p1, const D2D1_COLOR_F& color)
+    {
+        pRenderTarget_->CreateSolidColorBrush(color, &pBrush_);
+
         pRenderTarget_->DrawLine(p0, p1, pBrush_.Get());
     }
     void Graphics::DrawClosedPolyLine(const std::vector<dx::XMFLOAT2>& vertices, const D2D1_COLOR_F& color)
@@ -74,8 +80,7 @@ namespace fatpound::win32::d2d
             
             DrawLine(
                 D2D1::Point2F(current.x, current.y),
-                D2D1::Point2F(next.x, next.y),
-                color
+                D2D1::Point2F(next.x, next.y)
             );
         }
     }
@@ -95,8 +100,7 @@ namespace fatpound::win32::d2d
         
             DrawLine(
                 D2D1::Point2F(transformed0.x, transformed0.y),
-                D2D1::Point2F(transformed1.x, transformed1.y),
-                color
+                D2D1::Point2F(transformed1.x, transformed1.y)
             );
         }
     }
