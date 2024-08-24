@@ -186,6 +186,11 @@
     <ClCompile Include="Game\View\View.ixx" />
     <ClCompile Include="wWinMain.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FatModules\FatModules.vcxproj">
+      <Project>{064e2dd0-aee6-4af4-ae1a-64fdd79d9fb7}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
