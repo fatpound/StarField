@@ -1,6 +1,6 @@
 module;
 
-#include "../../Win32_/FatWin32_.hpp"
+#include <FatWin32_.hpp>
 
 #include <DirectXMath.h>
 
@@ -113,32 +113,6 @@ namespace starfield::entity
 
     auto Star::GetFadedColor_() const noexcept -> D2D1_COLOR_F
     {
-#if 0
-
-        const float sine_value = std::sin(color_frequency_ * totalTime + color_phase_);
-        const int offset = static_cast<int>(127.0f * sine_value) + 128;
-
-        __m128i offset_vec = _mm_set1_epi32(offset);
-        __m128i max_val = _mm_set1_epi32(255);
-
-        __m128 base_color_vec = _mm_set_ps(base_color_.b, base_color_.g, base_color_.r, 1.0f);
-        __m128 scaled_color_vec = _mm_mul_ps(base_color_vec, _mm_set1_ps(255.0f));
-        __m128i color_int_vec = _mm_cvttps_epi32(scaled_color_vec);
-        color_int_vec = _mm_add_epi32(color_int_vec, offset_vec);
-        color_int_vec = _mm_min_epi32(color_int_vec, max_val);
-
-        __m128 normalized_color_vec = _mm_cvtepi32_ps(color_int_vec);
-        normalized_color_vec = _mm_div_ps(normalized_color_vec, _mm_set1_ps(255.0f));
-
-        float colors[4];
-        _mm_storeu_ps(colors, normalized_color_vec);
-
-        return D2D1_COLOR_F(colors[1], colors[2], colors[3], 1.0f);
-
-#else
-
         return faded_color_;
-
-#endif
     }
 }

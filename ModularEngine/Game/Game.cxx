@@ -1,6 +1,6 @@
 module;
 
-#include "../Win32_/FatWin32_.hpp"
+#include <FatWin32_.hpp>
 
 #include <DirectXMath.h>
 
@@ -24,10 +24,10 @@ namespace starfield
 {
     Game::Game()
         :
-        wnd_{ L"StarField", NAMESPACE_WIN32::Window::ClientSizeInfo{ CLIENT_WIDTH, CLIENT_HEIGHT } },
-        gfx_{ wnd_.GetHwnd(), NAMESPACE_D2D::Graphics::SizeInfo{ wnd_.GetClientWidth<int>(), wnd_.GetClientHeight<int>() }}, // they are the same as SCREEN_ MACROS
+        wnd_{ L"StarField", NAMESPACE_UTIL::ScreenSizeInfo{ CLIENT_WIDTH, CLIENT_HEIGHT } },
+        gfx_{ wnd_.GetHwnd(), NAMESPACE_UTIL::ScreenSizeInfo{ wnd_.GetClientWidth<UINT>(), wnd_.GetClientHeight<UINT>() }}, // they are the same as SCREEN_ MACROS
         camera_{ gfx_ },
-        camera_controller_{ camera_, wnd_.mouse, wnd_.kbd },
+        camera_controller_{ camera_, wnd_.GetMouse(), wnd_.GetKeyboard() },
         drawables_{ StarFactory{}.GetStars() }
     {
          
@@ -46,7 +46,7 @@ namespace starfield
                 return static_cast<int>(*error_code);
             }
 
-            if (wnd_.kbd.KeyIsPressed(VK_ESCAPE)) [[unlikely]]
+            if (wnd_.GetKeyboard().KeyIsPressed(VK_ESCAPE)) [[unlikely]]
             {
                 wnd_.Kill();
 

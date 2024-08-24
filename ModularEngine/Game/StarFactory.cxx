@@ -1,5 +1,8 @@
 module;
 
+#include <FatWin32_Settings.hpp>
+#include <FatWin32_Namespaces.hpp>
+
 #include <DirectXMath.h>
 
 #include <d2d1.h>
