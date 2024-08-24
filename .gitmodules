@@ -1,0 +1,3 @@
+[submodule "FatModules"]
+	path = FatModules
+	url = https://github.com/fatpound/FatModules
