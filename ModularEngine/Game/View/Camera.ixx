@@ -33,7 +33,7 @@ export namespace starfield
     public:
         auto GetPos() const noexcept -> DirectX::XMFLOAT2;
 
-        auto GetViewportRect(NAMESPACE_D2D::Graphics& gfx) const noexcept -> NAMESPACE_MATH::RectF;
+        auto GetViewportRect(const NAMESPACE_D2D::Graphics& gfx) const noexcept -> NAMESPACE_MATH::RectF;
 
         float GetAngle() const noexcept;
         float GetScale() const noexcept;

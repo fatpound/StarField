@@ -24,7 +24,7 @@ namespace starfield
         return pos_;
     }
 
-    auto Camera::GetViewportRect(NAMESPACE_D2D::Graphics& gfx) const noexcept -> NAMESPACE_MATH::RectF
+    auto Camera::GetViewportRect(const NAMESPACE_D2D::Graphics& gfx) const noexcept -> NAMESPACE_MATH::RectF
     {
         const float zoom = 1.0f / scale_;
 
