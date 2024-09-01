@@ -35,7 +35,7 @@ export namespace starfield
 
 
     private:
-        void UpdateModel_();
+        void UpdateModel_() noexcept;
         void DoFrame_();
 
 

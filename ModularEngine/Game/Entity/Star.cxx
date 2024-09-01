@@ -14,8 +14,8 @@ namespace starfield::entity
 {
     Star::Star(const Descriptor& desc)
         :
-        model_{ std::move(Star::Make(desc.radiuses.outer_radius, desc.radiuses.inner_radius, desc.flareCount)) },
-        desc_{ std::move(desc) },
+        model_{ Star::Make(desc.radiuses.outer_radius, desc.radiuses.inner_radius, desc.flareCount) },
+        desc_{ desc },
         faded_color_{ desc.color }
     {
 
@@ -40,8 +40,8 @@ namespace starfield::entity
 
             const float angle = static_cast<float>(i) * theta;
 
-            dx::XMVECTOR direction = dx::XMVectorSet(std::cos(angle), std::sin(angle), 0.0f, 0.0f);
-            dx::XMVECTOR point = dx::XMVectorScale(direction, radius);
+            const dx::XMVECTOR direction = dx::XMVectorSet(std::cos(angle), std::sin(angle), 0.0f, 0.0f);
+            const dx::XMVECTOR point = dx::XMVectorScale(direction, radius);
 
             dx::XMFLOAT2 point2D;
             dx::XMStoreFloat2(&point2D, point);
@@ -57,16 +57,16 @@ namespace starfield::entity
         return star1.CollidesWith(star2);
     }
 
-    auto Star::GetBoundingRect() const -> NAMESPACE_MATH::RectF
+    auto Star::GetBoundingRect() const noexcept -> NAMESPACE_MATH::RectF
     {
         return NAMESPACE_MATH::RectF::FromCenter(desc_.position, desc_.radiuses.outer_radius, desc_.radiuses.outer_radius);
     }
 
-    void Star::ApplyTransformation(const dx::XMMATRIX& transformer)
+    void Star::ApplyTransformation(const dx::XMMATRIX& transformer) noexcept
     {
         transformation_ *= transformer;
     }
-    void Star::UpdateTo(float total_time)
+    void Star::UpdateTo(float total_time) noexcept
     {
         const float radiusOffset = desc_.radiusAmplitude * std::sin(desc_.radiusFrequency * total_time + desc_.radiusPhase);
         const float scale = 1.0f + radiusOffset;
@@ -84,17 +84,17 @@ namespace starfield::entity
         faded_color_.g = static_cast<float>(std::min(static_cast<int>(desc_.color.g * 255) + offset, 255)) / 255.0f;
         faded_color_.b = static_cast<float>(std::min(static_cast<int>(desc_.color.b * 255) + offset, 255)) / 255.0f;
     }
-    void Star::Draw(NAMESPACE_D2D::Graphics& gfx) const
+    void Star::Draw(NAMESPACE_D2D::Graphics& gfx) const noexcept
     {
         gfx.DrawClosedPolyLine(model_, GetFadedColor_(), transformation_);
     }
 
-    auto Star::GetPos() const -> DirectX::XMFLOAT2
+    auto Star::GetPos() const noexcept -> DirectX::XMFLOAT2
     {
         return desc_.position;
     }
 
-    float Star::GetMaxRadius() const
+    float Star::GetMaxRadius() const noexcept
     {
         return desc_.radiuses.outer_radius * (1.0f + desc_.radiusAmplitude);
     }
@@ -103,7 +103,7 @@ namespace starfield::entity
     {
         return IsWithinArea(star.GetPos(), star.GetMaxRadius());
     }
-    bool Star::IsWithinArea(const dx::XMFLOAT2& position, const float& radius) const noexcept
+    bool Star::IsWithinArea(const dx::XMFLOAT2& position, float radius) const noexcept
     {
         const float distance = NAMESPACE_MATH::GetDistanceBetweenXMF2(this->GetPos(), position);
         const float maxradsum = this->GetMaxRadius() + radius;

@@ -60,9 +60,9 @@ namespace starfield
         }
     }
 
-    void Game::UpdateModel_()
+    void Game::UpdateModel_() noexcept
     {
-        float deltaTime = timer_.Mark();
+        const float deltaTime = timer_.Mark();
 
         totalTime_ += deltaTime;
 

@@ -12,7 +12,7 @@ namespace dx = DirectX;
 
 namespace starfield
 {
-    CameraController::CameraController(Camera& camera, NAMESPACE_IO::Mouse& mouse, const NAMESPACE_IO::Keyboard& kbd)
+    CameraController::CameraController(Camera& camera, NAMESPACE_IO::Mouse& mouse, const NAMESPACE_IO::Keyboard& kbd) noexcept
         :
         camera_(camera),
         mouse_(mouse),
@@ -21,7 +21,7 @@ namespace starfield
 
     }
 
-    void CameraController::Update(float deltaTime)
+    void CameraController::Update(float deltaTime) noexcept
     {
         if (kbd_.KeyIsPressed('Q'))
         {
@@ -66,25 +66,29 @@ namespace starfield
 
         if (engaged_)
         {
-            dx::XMVECTOR lastPositionVec = dx::XMLoadFloat2(&lastPosition_);
+            // I have to delete this file and use FatModules' Camera system
 
             const auto& pos = mouse_.GetPos();
-            dx::XMFLOAT2 currentPosition = { static_cast<float>(pos.first), static_cast<float>(pos.second) };
 
-            dx::XMVECTOR currentPositionVec = dx::XMLoadFloat2(&currentPosition);
-            dx::XMVECTOR deltaPositionVec = dx::XMVectorSubtract(currentPositionVec, lastPositionVec);
+            const auto& lastPositionVec = ::dx::XMLoadFloat2(&lastPosition_);
+            const auto& currentPosition = ::dx::XMFLOAT2{ static_cast<float>(pos.first), static_cast<float>(pos.second) };
 
-            deltaPositionVec = dx::XMVectorSetX(deltaPositionVec, -dx::XMVectorGetX(deltaPositionVec));
+            const auto& currentPositionVec = dx::XMLoadFloat2(&currentPosition);
+            auto deltaPositionVec = ::dx::XMVectorSubtract(currentPositionVec, lastPositionVec);
 
-            float angle = -camera_.GetAngle();
-            dx::XMMATRIX rotationMatrix = dx::XMMatrixRotationZ(angle);
-            deltaPositionVec = dx::XMVector2TransformCoord(deltaPositionVec, rotationMatrix);
+            deltaPositionVec = ::dx::XMVectorSetX(deltaPositionVec, -::dx::XMVectorGetX(deltaPositionVec));
 
-            dx::XMVECTOR scaleVec = dx::XMVectorReplicate(1.0f / camera_.GetScale());
-            deltaPositionVec = dx::XMVectorMultiply(deltaPositionVec, scaleVec);
+            const auto angle = -camera_.GetAngle();
 
-            dx::XMFLOAT2 deltaPosition;
-            dx::XMStoreFloat2(&deltaPosition, deltaPositionVec);
+            const auto& rotationMatrix = ::dx::XMMatrixRotationZ(angle);
+
+            deltaPositionVec = ::dx::XMVector2TransformCoord(deltaPositionVec, rotationMatrix);
+
+            const auto& scaleVec = ::dx::XMVectorReplicate(1.0f / camera_.GetScale());
+            deltaPositionVec = ::dx::XMVectorMultiply(deltaPositionVec, scaleVec);
+
+            ::dx::XMFLOAT2 deltaPosition;
+            ::dx::XMStoreFloat2(&deltaPosition, deltaPositionVec);
 
             camera_.MoveBy(deltaPosition);
 

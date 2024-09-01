@@ -12,26 +12,26 @@ namespace dx = DirectX;
 
 namespace starfield
 {
-    Camera::Camera(NAMESPACE_D2D::Graphics& gfx)
+    Camera::Camera(NAMESPACE_D2D::Graphics& gfx) noexcept
         :
         gfx_(gfx)
     {
 
     }
 
-    auto Camera::GetPos() const -> dx::XMFLOAT2
+    auto Camera::GetPos() const noexcept -> dx::XMFLOAT2
     {
         return pos_;
     }
 
-    auto Camera::GetViewportRect(NAMESPACE_D2D::Graphics& gfx) const -> NAMESPACE_MATH::RectF
+    auto Camera::GetViewportRect(NAMESPACE_D2D::Graphics& gfx) const noexcept -> NAMESPACE_MATH::RectF
     {
         const float zoom = 1.0f / scale_;
 
         const float diagonal = std::sqrt(
-            NAMESPACE_MATH::Square(static_cast<float>(gfx.width_  / 2.0f) * zoom)
+            NAMESPACE_MATH::Square(static_cast<float>(gfx.width_)  / 2.0f * zoom)
             +
-            NAMESPACE_MATH::Square(static_cast<float>(gfx.height_ / 2.0f) * zoom)
+            NAMESPACE_MATH::Square(static_cast<float>(gfx.height_) / 2.0f * zoom)
         );
 
         return NAMESPACE_MATH::RectF::FromCenter(
@@ -41,29 +41,29 @@ namespace starfield
         );
     }
 
-    float Camera::GetAngle() const
+    float Camera::GetAngle() const noexcept
     {
         return angle_;
     }
-    float Camera::GetScale() const
+    float Camera::GetScale() const noexcept
     {
         return scale_;
     }
 
-    void Camera::SetAngle(const float angle)
+    void Camera::SetAngle(const float angle) noexcept
     {
         angle_ = angle;
     }
-    void Camera::SetScale(const float scale)
+    void Camera::SetScale(const float scale) noexcept
     {
         scale_ = scale;
     }
-    void Camera::MoveBy(const dx::XMFLOAT2& offset)
+    void Camera::MoveBy(const dx::XMFLOAT2& offset) noexcept
     {
         pos_.x += offset.x;
         pos_.y += offset.y;
     }
-    void Camera::MoveTo(const dx::XMFLOAT2& pos)
+    void Camera::MoveTo(const dx::XMFLOAT2& pos) noexcept
     {
         pos_ = pos;
     }

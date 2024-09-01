@@ -25,7 +25,7 @@ namespace starfield
         }
     }
 
-    auto StarFactory::GetStars() && -> std::vector<std::unique_ptr<entity::Star>>&&
+    auto StarFactory::GetStars() && noexcept -> std::vector<std::unique_ptr<entity::Star>>&&
     {
         return std::move(stars_);
     }

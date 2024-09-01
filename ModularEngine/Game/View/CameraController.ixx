@@ -19,11 +19,19 @@ export namespace starfield
     class CameraController final
     {
     public:
-        CameraController(Camera& camera, NAMESPACE_IO::Mouse& mouse, const NAMESPACE_IO::Keyboard& kbd);
+        CameraController(Camera& camera, NAMESPACE_IO::Mouse& mouse, const NAMESPACE_IO::Keyboard& kbd) noexcept;
+
+        CameraController() = delete;
+        CameraController(const CameraController& src) = delete;
+        CameraController(CameraController&& src) = delete;
+
+        CameraController& operator = (const CameraController& src) = delete;
+        CameraController& operator = (CameraController&& src) = delete;
+        ~CameraController() noexcept = default;
 
 
     public:
-        void Update(float deltaTime);
+        void Update(float deltaTime) noexcept;
 
 
     protected:

@@ -20,10 +20,16 @@ export namespace starfield
     {
     public:
         StarFactory();
+        StarFactory(const StarFactory& src) = delete;
+        StarFactory(StarFactory&& src) = delete;
+
+        StarFactory& operator = (const StarFactory& src) = delete;
+        StarFactory& operator = (StarFactory&& src) = delete;
+        ~StarFactory() noexcept = default;
 
 
     public:
-        auto GetStars() && -> std::vector<std::unique_ptr<entity::Star>> &&;
+        auto GetStars() && noexcept -> std::vector<std::unique_ptr<entity::Star>> &&;
 
 
     protected:

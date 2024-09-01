@@ -48,6 +48,14 @@ export namespace starfield::entity
     public:
         Star(const Descriptor& desc);
 
+        Star() = delete;
+        Star(const Star& src) = delete;
+        Star(Star&& src) = delete;
+
+        Star& operator = (const Star& src) = delete;
+        Star& operator = (Star&& src) = delete;
+        virtual ~Star() noexcept = default;
+
 
     public:
         static auto Make(float outerRadius, float innerRadius, std::size_t nFlares = 5u) -> std::vector<DirectX::XMFLOAT2>;
@@ -56,20 +64,20 @@ export namespace starfield::entity
 
 
     public:
-        virtual auto GetBoundingRect() const -> NAMESPACE_MATH::RectF override final;
+        virtual auto GetBoundingRect() const noexcept -> NAMESPACE_MATH::RectF override final;
 
-        virtual void ApplyTransformation(const DirectX::XMMATRIX& transformer) override final;
-        virtual void UpdateTo(float total_time) override final;
-        virtual void Draw(NAMESPACE_D2D::Graphics& gfx) const override final;
+        virtual void ApplyTransformation(const DirectX::XMMATRIX& transformer) noexcept override final;
+        virtual void UpdateTo(float total_time) noexcept override final;
+        virtual void Draw(NAMESPACE_D2D::Graphics& gfx) const noexcept override final;
 
 
     public:
-        auto GetPos() const -> DirectX::XMFLOAT2;
+        auto GetPos() const noexcept -> DirectX::XMFLOAT2;
 
-        float GetMaxRadius() const;
+        float GetMaxRadius() const noexcept;
 
         bool CollidesWith(const Star& star) const noexcept;
-        bool IsWithinArea(const DirectX::XMFLOAT2& position, const float& radius) const noexcept;
+        bool IsWithinArea(const DirectX::XMFLOAT2& position, float radius) const noexcept;
 
 
     protected:
