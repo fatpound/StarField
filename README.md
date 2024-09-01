@@ -2,7 +2,8 @@
 
 ![starfieldv2](https://github.com/user-attachments/assets/83d5d5b7-bf60-4fa0-9e07-a284ebb8fe71)
 
-This project is similar to [StarRealm](https://github.com/fatpound/StarRealm)
+This project is similar to [StarRealm](https://github.com/fatpound/StarRealm).\
+The codes are PVS-Studio clean.
 
 Building
 --------
