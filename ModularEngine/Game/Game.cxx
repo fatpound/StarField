@@ -7,11 +7,11 @@ module;
 #include <d2d1.h>
 
 #if IN_RELEASE
-#define CLIENT_WIDTH    GetSystemMetrics(SM_CXSCREEN)
-#define CLIENT_HEIGHT   GetSystemMetrics(SM_CYSCREEN)
+#define SCREEN_WIDTH    static_cast<UINT>(GetSystemMetrics(SM_CXSCREEN))
+#define SCREEN_HEIGHT   static_cast<UINT>(GetSystemMetrics(SM_CYSCREEN))
 #else
-#define CLIENT_WIDTH    800
-#define CLIENT_HEIGHT   600
+#define SCREEN_WIDTH    800u
+#define SCREEN_HEIGHT   600u
 #endif // IN_RELEASE
 
 module StarField;
@@ -24,7 +24,7 @@ namespace starfield
 {
     Game::Game()
         :
-        wnd_{ L"StarField", NAMESPACE_UTIL::ScreenSizeInfo{ CLIENT_WIDTH, CLIENT_HEIGHT } },
+        wnd_{ L"StarField", NAMESPACE_UTIL::ScreenSizeInfo{ SCREEN_WIDTH, SCREEN_HEIGHT } },
         gfx_{ wnd_.GetHwnd(), NAMESPACE_UTIL::ScreenSizeInfo{ wnd_.GetClientWidth<UINT>(), wnd_.GetClientHeight<UINT>() }}, // they are the same as SCREEN_ MACROS
         camera_{ gfx_ },
         camera_controller_{ camera_, wnd_.GetMouse(), wnd_.GetKeyboard() },
