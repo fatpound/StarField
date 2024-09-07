@@ -25,8 +25,8 @@ export namespace starfield
         CameraController(const CameraController& src) = delete;
         CameraController(CameraController&& src) = delete;
 
-        CameraController& operator = (const CameraController& src) = delete;
-        CameraController& operator = (CameraController&& src) = delete;
+        auto operator = (const CameraController& src) -> CameraController& = delete;
+        auto operator = (CameraController&& src)      -> CameraController& = delete;
         ~CameraController() noexcept = default;
 
 
@@ -43,11 +43,11 @@ export namespace starfield
         NAMESPACE_IO::Mouse& mouse_;
         const NAMESPACE_IO::Keyboard& kbd_;
 
-        DirectX::XMFLOAT2 lastPosition_ = { 0.0f, 0.0f };
+        ::DirectX::XMFLOAT2 lastPosition_ = { 0.0f, 0.0f };
 
         bool engaged_ = false;
 
         static constexpr float zoomFactor_ = 1.05f;
-        static constexpr float rotationSpeed_ = DirectX::XM_PI / 6.0f;
+        static constexpr float rotationSpeed_ = ::DirectX::XM_PI / 6.0f;
     };
 }

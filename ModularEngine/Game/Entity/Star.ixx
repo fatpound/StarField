@@ -52,15 +52,15 @@ export namespace starfield::entity
         Star(const Star& src) = delete;
         Star(Star&& src) = delete;
 
-        Star& operator = (const Star& src) = delete;
-        Star& operator = (Star&& src) = delete;
+        auto operator = (const Star& src) -> Star& = delete;
+        auto operator = (Star&& src) -> Star& = delete;
         virtual ~Star() noexcept = default;
 
 
     public:
         static auto Make(float outerRadius, float innerRadius, std::size_t nFlares = 5u) -> std::vector<DirectX::XMFLOAT2>;
 
-        static bool CheckCollision(const Star& star1, const Star& star2) noexcept;
+        static auto CheckCollision(const Star& star1, const Star& star2) noexcept -> bool;
 
 
     public:
@@ -74,10 +74,10 @@ export namespace starfield::entity
     public:
         auto GetPos() const noexcept -> DirectX::XMFLOAT2;
 
-        float GetMaxRadius() const noexcept;
+        auto GetMaxRadius() const noexcept -> float;
 
-        bool CollidesWith(const Star& star) const noexcept;
-        bool IsWithinArea(const DirectX::XMFLOAT2& position, float radius) const noexcept;
+        auto CollidesWith(const Star& star) const noexcept -> bool;
+        auto IsWithinArea(const DirectX::XMFLOAT2& position, float radius) const noexcept -> bool;
 
 
     protected:

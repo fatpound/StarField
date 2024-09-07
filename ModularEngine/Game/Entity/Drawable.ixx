@@ -19,8 +19,8 @@ export namespace starfield::entity
         Drawable(const Drawable& src) = delete;
         Drawable(Drawable&& src) = delete;
 
-        Drawable& operator = (const Drawable& src) = delete;
-        Drawable& operator = (Drawable&& src) = delete;
+        auto operator = (const Drawable& src) -> Drawable& = delete;
+        auto operator = (Drawable&& src)      -> Drawable& = delete;
         virtual ~Drawable() noexcept = default;
 
 

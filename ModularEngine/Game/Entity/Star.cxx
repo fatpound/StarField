@@ -52,7 +52,7 @@ namespace starfield::entity
         return star;
     }
 
-    bool Star::CheckCollision(const Star& star1, const Star& star2) noexcept
+    auto Star::CheckCollision(const Star& star1, const Star& star2) noexcept -> bool
     {
         return star1.CollidesWith(star2);
     }
@@ -94,16 +94,16 @@ namespace starfield::entity
         return desc_.position;
     }
 
-    float Star::GetMaxRadius() const noexcept
+    auto Star::GetMaxRadius() const noexcept -> float
     {
         return desc_.radiuses.outer_radius * (1.0f + desc_.radiusAmplitude);
     }
 
-    bool Star::CollidesWith(const Star& star) const noexcept
+    auto Star::CollidesWith(const Star& star) const noexcept -> bool
     {
         return IsWithinArea(star.GetPos(), star.GetMaxRadius());
     }
-    bool Star::IsWithinArea(const dx::XMFLOAT2& position, float radius) const noexcept
+    auto Star::IsWithinArea(const dx::XMFLOAT2& position, float radius) const noexcept -> bool
     {
         const float distance = NAMESPACE_MATH::GetDistanceBetweenXMF2(this->GetPos(), position);
         const float maxradsum = this->GetMaxRadius() + radius;

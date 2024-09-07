@@ -41,11 +41,11 @@ namespace starfield
         );
     }
 
-    float Camera::GetAngle() const noexcept
+    auto Camera::GetAngle() const noexcept -> float
     {
         return angle_;
     }
-    float Camera::GetScale() const noexcept
+    auto Camera::GetScale() const noexcept -> float
     {
         return scale_;
     }

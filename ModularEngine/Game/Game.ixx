@@ -20,15 +20,15 @@ export namespace starfield
     public:
         Game();
         Game(const Game& src) = delete;
-        Game& operator = (const Game& src) = delete;
-
         Game(Game&& src) = delete;
-        Game& operator = (Game&& src) = delete;
+
+        auto operator = (const Game& src) -> Game& = delete;
+        auto operator = (Game&& src)      -> Game& = delete;
         ~Game() noexcept = default;
 
 
     public:
-        int Go();
+        auto Go() -> int;
 
 
     protected:
@@ -41,7 +41,6 @@ export namespace starfield
 
     private:
         NAMESPACE_WIN32::Window wnd_;
-
         NAMESPACE_D2D::Graphics gfx_;
 
         NAMESPACE_UTIL::AutoTimer timer_;

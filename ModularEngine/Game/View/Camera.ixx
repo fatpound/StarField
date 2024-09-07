@@ -25,8 +25,8 @@ export namespace starfield
         Camera(const Camera& src) = delete;
         Camera(Camera&& src) = delete;
 
-        Camera& operator = (const Camera& src) = delete;
-        Camera& operator = (Camera&& src) = delete;
+        auto operator = (const Camera& src) -> Camera& = delete;
+        auto operator = (Camera&& src)      -> Camera& = delete;
         ~Camera() noexcept = default;
 
 
@@ -35,8 +35,8 @@ export namespace starfield
 
         auto GetViewportRect(const NAMESPACE_D2D::Graphics& gfx) const noexcept -> NAMESPACE_MATH::RectF;
 
-        float GetAngle() const noexcept;
-        float GetScale() const noexcept;
+        auto GetAngle() const noexcept -> float;
+        auto GetScale() const noexcept -> float;
 
         void SetAngle(const float angle) noexcept;
         void SetScale(const float scale) noexcept;
