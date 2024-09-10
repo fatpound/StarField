@@ -46,13 +46,6 @@ namespace starfield
                 return static_cast<int>(*error_code);
             }
 
-            if (wnd_.GetKeyboard().KeyIsPressed(VK_ESCAPE)) [[unlikely]]
-            {
-                wnd_.Kill();
-
-                return 0;
-            }
-
             gfx_.BeginFrame();
             UpdateModel_();
             DoFrame_();
