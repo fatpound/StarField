@@ -27,7 +27,7 @@ namespace starfield
         wnd_{ L"StarField", NAMESPACE_UTIL::ScreenSizeInfo{ SCREEN_WIDTH, SCREEN_HEIGHT } },
         gfx_{ wnd_.GetHwnd(), NAMESPACE_UTIL::ScreenSizeInfo{ wnd_.GetClientWidth<UINT>(), wnd_.GetClientHeight<UINT>() }}, // they are the same as SCREEN_ MACROS
         camera_{ gfx_ },
-        camera_controller_{ camera_, wnd_.GetMouse(), wnd_.GetKeyboard() },
+        camera_controller_{ camera_, wnd_.m_mouse, wnd_.m_keyboard },
         drawables_{ StarFactory{}.GetStars() }
     {
          
