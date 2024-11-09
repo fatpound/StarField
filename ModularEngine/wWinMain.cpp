@@ -2,7 +2,7 @@
 // fatpound //
 /*          */
 
-#include "Win32_/FatWin32_.hpp"
+#include <FatWin32.hpp>
 
 import StarField;
 
