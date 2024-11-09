@@ -25,11 +25,11 @@ export namespace starfield::entity
 
 
     public:
-        virtual auto GetBoundingRect() const -> NAMESPACE_MATH::RectF = 0;
+        virtual auto GetBoundingRect() const -> FATSPACE_MATH::RectF = 0;
 
         virtual void ApplyTransformation(const DirectX::XMMATRIX& transformer) = 0;
-        virtual void UpdateTo(float total_time) = 0;
-        virtual void Draw(NAMESPACE_D2D::Graphics& gfx) const = 0;
+        virtual void UpdateTo(const float total_time) = 0;
+        virtual void Draw(FATSPACE_D2D::Graphics& gfx) const = 0;
 
 
     protected:

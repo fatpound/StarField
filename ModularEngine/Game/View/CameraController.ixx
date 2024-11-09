@@ -19,11 +19,11 @@ export namespace starfield
     class CameraController final
     {
     public:
-        CameraController(Camera& camera, NAMESPACE_IO::Mouse& mouse, const NAMESPACE_IO::Keyboard& kbd) noexcept;
+        explicit CameraController(Camera& camera, FATSPACE_UTIL_IO::Mouse& mouse, const FATSPACE_UTIL_IO::Keyboard& kbd) noexcept;
 
-        CameraController() = delete;
-        CameraController(const CameraController& src) = delete;
-        CameraController(CameraController&& src) = delete;
+        explicit CameraController() = delete;
+        explicit CameraController(const CameraController& src) = delete;
+        explicit CameraController(CameraController&& src) = delete;
 
         auto operator = (const CameraController& src) -> CameraController& = delete;
         auto operator = (CameraController&& src)      -> CameraController& = delete;
@@ -38,16 +38,16 @@ export namespace starfield
 
 
     private:
-        Camera& camera_;
+        Camera& m_camera_;
 
-        NAMESPACE_IO::Mouse& mouse_;
-        const NAMESPACE_IO::Keyboard& kbd_;
+        FATSPACE_UTIL_IO::Mouse& m_mouse_;
+        const FATSPACE_UTIL_IO::Keyboard& m_kbd_;
 
-        ::DirectX::XMFLOAT2 lastPosition_ = { 0.0f, 0.0f };
+        ::DirectX::XMFLOAT2 m_last_pos_{ 0.0f, 0.0f };
 
-        bool engaged_ = false;
+        bool engaged_{};
 
-        static constexpr float zoomFactor_ = 1.05f;
-        static constexpr float rotationSpeed_ = ::DirectX::XM_PI / 6.0f;
+        static constexpr auto zoomFactor_ = 1.05f;
+        static constexpr auto rotationSpeed_ = ::DirectX::XM_PI / 6.0f;
     };
 }

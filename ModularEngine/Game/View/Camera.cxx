@@ -12,30 +12,30 @@ namespace dx = DirectX;
 
 namespace starfield
 {
-    Camera::Camera(NAMESPACE_D2D::Graphics& gfx) noexcept
+    Camera::Camera(FATSPACE_D2D::Graphics& gfx) noexcept
         :
-        gfx_(gfx)
+        m_gfx_(gfx)
     {
 
     }
 
     auto Camera::GetPos() const noexcept -> dx::XMFLOAT2
     {
-        return pos_;
+        return m_pos_;
     }
 
-    auto Camera::GetViewportRect(const NAMESPACE_D2D::Graphics& gfx) const noexcept -> NAMESPACE_MATH::RectF
+    auto Camera::GetViewportRect(const FATSPACE_D2D::Graphics& gfx) const noexcept -> FATSPACE_MATH::RectF
     {
-        const float zoom = 1.0f / scale_;
+        const float zoom = 1.0f / m_scale_;
 
         const float diagonal = std::sqrt(
-            NAMESPACE_MATH::Square(static_cast<float>(gfx.width_)  / 2.0f * zoom)
+            FATSPACE_MATH::Square(static_cast<float>(gfx.width_)  / 2.0f * zoom)
             +
-            NAMESPACE_MATH::Square(static_cast<float>(gfx.height_) / 2.0f * zoom)
+            FATSPACE_MATH::Square(static_cast<float>(gfx.height_) / 2.0f * zoom)
         );
 
-        return NAMESPACE_MATH::RectF::FromCenter(
-            pos_,
+        return FATSPACE_MATH::RectF::FromCenter(
+            m_pos_,
             diagonal,
             diagonal
         );
@@ -43,47 +43,47 @@ namespace starfield
 
     auto Camera::GetAngle() const noexcept -> float
     {
-        return angle_;
+        return m_angle_;
     }
     auto Camera::GetScale() const noexcept -> float
     {
-        return scale_;
+        return m_scale_;
     }
 
     void Camera::SetAngle(const float angle) noexcept
     {
-        angle_ = angle;
+        m_angle_ = angle;
     }
     void Camera::SetScale(const float scale) noexcept
     {
-        scale_ = scale;
+        m_scale_ = scale;
     }
     void Camera::MoveBy(const dx::XMFLOAT2& offset) noexcept
     {
-        pos_.x += offset.x;
-        pos_.y += offset.y;
+        m_pos_.x += offset.x;
+        m_pos_.y += offset.y;
     }
     void Camera::MoveTo(const dx::XMFLOAT2& pos) noexcept
     {
-        pos_ = pos;
+        m_pos_ = pos;
     }
 
-    void Camera::Draw(entity::Drawable* drawable) const
+    void Camera::Draw(entity::Drawable* const drawable) const
     {
         const dx::XMFLOAT2 offset =
         {
-            static_cast<float>(gfx_.width_)  / 2.0f,
-            static_cast<float>(gfx_.height_) / 2.0f
+            static_cast<float>(m_gfx_.width_)  / 2.0f,
+            static_cast<float>(m_gfx_.height_) / 2.0f
         };
 
         const auto& transform =
-            dx::XMMatrixTranslation(-pos_.x, -pos_.y, 0.0f) *
-            dx::XMMatrixScaling(scale_, scale_, 1.0f) *
-            dx::XMMatrixRotationZ(angle_) *
+            dx::XMMatrixTranslation(-m_pos_.x, -m_pos_.y, 0.0f) *
+            dx::XMMatrixScaling(m_scale_, m_scale_, 1.0f) *
+            dx::XMMatrixRotationZ(m_angle_) *
             dx::XMMatrixScaling(1.0f, -1.0f, 1.0f) *
             dx::XMMatrixTranslation(offset.x, offset.y, 0.0f);
 
         drawable->ApplyTransformation(transform);
-        drawable->Draw(gfx_);
+        drawable->Draw(m_gfx_);
     }
 }

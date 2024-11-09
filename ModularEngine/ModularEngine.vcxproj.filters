@@ -45,9 +45,6 @@
     <ClCompile Include="Game\View\View.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game\StarFactory.cxx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Game\StarFactory.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>

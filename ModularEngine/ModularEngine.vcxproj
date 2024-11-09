@@ -171,7 +171,6 @@
     <ClCompile Include="Game\Entity\Entity.ixx" />
     <ClCompile Include="Game\Entity\Star.cxx" />
     <ClCompile Include="Game\Entity\Star.ixx" />
-    <ClCompile Include="Game\StarFactory.cxx" />
     <ClCompile Include="Game\StarFactory.ixx" />
     <ClCompile Include="Game\Game.cxx" />
     <ClCompile Include="Game\Game.ixx" />

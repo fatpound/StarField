@@ -16,12 +16,72 @@ namespace dx = DirectX;
 
 export namespace starfield
 {
+    template <
+        std::floating_point float_t = float,
+        std::integral       size_t = unsigned int
+    >
     class StarFactory final
     {
+        using unique_pstar = std::unique_ptr<entity::Star>;
+
     public:
-        StarFactory();
-        StarFactory(const StarFactory& src) = delete;
-        StarFactory(StarFactory&& src) = delete;
+        struct Settings final
+        {
+            size_t m_starCount     = 500ull;
+            size_t m_minFlareCount =   2ull;
+            size_t m_maxFlareCount =  10ull;
+
+            float_t m_worldWidth  = 12000.0f;
+            float_t m_worldHeight = 10000.0f;
+
+            float_t m_meanFlares = 6.5f;
+            float_t m_devFlares  = 2.0f;
+
+            float_t m_meanStarRadius = 160.0f;
+            float_t m_devStarRadius  = 90.0f;
+            float_t m_maxStarRadius  = 300.0f;
+            float_t m_minStarRadius  = 40.0f;
+
+            float_t m_meanStarInnerRatio = 0.4f;
+            float_t m_devStarInnerRatio  = 0.25f;
+            float_t m_maxStarInnerRatio  = 0.8f;
+            float_t m_minStarInnerRatio  = 0.15f;
+
+            float_t m_meanColorFrequency = 1.5f;
+            float_t m_devColorFrequency  = 1.0f;
+            float_t m_minColorFrequency  = 0.2f;
+            float_t m_maxColorFrequency  = 1.0f;
+
+            float_t m_meanRadiusAmplitude = 0.5f;
+            float_t m_devRadiusAmplitude  = 0.3f;
+            float_t m_minRadiusAmplitude  = 0.1f;
+            float_t m_maxRadiusAmplitude  = 0.9f;
+
+            float_t m_meanRadiusFrequency = 1.8f;
+            float_t m_devRadiusFrequency  = 1.5f;
+            float_t m_minRadiusFrequency  = 0.6f;
+            float_t m_maxRadiusFrequency  = 4.0f;
+
+            float_t m_minRotationSpeed = -1.0f * ::std::numbers::pi_v<float_t>;
+            float_t m_maxRotationSpeed =  1.0f * ::std::numbers::pi_v<float_t>;
+        };
+
+
+    public:
+        explicit StarFactory(const Settings& settings = {})
+            :
+            mc_settings_(settings)
+        {
+            m_stars_.reserve(mc_settings_.m_starCount);
+
+            while (m_stars_.size() < mc_settings_.m_starCount)
+            {
+                m_stars_.push_back(GenerateStar_());
+            }
+        }
+        //
+        explicit StarFactory(const StarFactory& src) = delete;
+        explicit StarFactory(StarFactory&& src) = delete;
 
         auto operator = (const StarFactory& src) -> StarFactory& = delete;
         auto operator = (StarFactory&& src)      -> StarFactory& = delete;
@@ -29,87 +89,77 @@ export namespace starfield
 
 
     public:
-        auto GetStars() && noexcept -> std::vector<std::unique_ptr<entity::Star>> &&;
+        auto GetStars() && noexcept -> std::vector<unique_pstar>&&
+        {
+            return std::move(m_stars_);
+        }
 
 
     protected:
 
 
     private:
-        struct Settings_ final
+        auto GenerateStar_() -> unique_pstar
         {
-            static constexpr auto starCount_ = 500ull;
-            static constexpr auto minFlareCount_ = 2ull;
-            static constexpr auto maxFlareCount_ = 10ull;
+        generation:
 
-            static constexpr auto worldWidth_ = 12000.0f;
-            static constexpr auto worldHeight_ = 10000.0f;
+            const auto& starPosition = dx::XMFLOAT2{ m_dist_x_position_(m_rng_), m_dist_y_position_(m_rng_) };
+            const auto& radius       = std::clamp(m_dist_radius_(m_rng_), mc_settings_.m_minStarRadius, mc_settings_.m_maxStarRadius);
+            const auto& radAmplitude = std::clamp(m_dist_radius_amplitude_(m_rng_), mc_settings_.m_minRadiusAmplitude, mc_settings_.m_maxRadiusAmplitude);
+            const auto& maxRadius    = radius * (1.0f + radAmplitude);
 
-            static constexpr auto meanFlares_ = 6.5f;
-            static constexpr auto devFlares_ = 2.0f;
+            if (std::ranges::any_of(m_stars_, [&](const auto& pstar) noexcept -> bool { return pstar->IsWithinArea(starPosition, maxRadius); }))
+            {
+                goto generation;
+            }
 
-            static constexpr auto meanStarRadius_ = 160.0f;
-            static constexpr auto devStarRadius_ = 90.0f;
-            static constexpr auto maxStarRadius_ = 300.0f;
-            static constexpr auto minStarRadius_ = 40.0f;
+            entity::Star::Descriptor desc{
+                .position              = starPosition,
+                .radiuses              = { radius, radius * std::clamp(m_dist_radius_ratio_(m_rng_), mc_settings_.m_minStarInnerRatio, mc_settings_.m_maxStarInnerRatio) },
+                .color                 = m_colors[m_dist_color_(m_rng_)],
+                .flareCount            = std::clamp(static_cast<size_t>(m_dist_flare_count_(m_rng_)), mc_settings_.m_minFlareCount, mc_settings_.m_maxFlareCount),
+                .colorFrequency        = std::clamp(m_dist_color_frequency_(m_rng_), mc_settings_.m_minColorFrequency, mc_settings_.m_maxColorFrequency),
+                .colorPhase            = m_dist_phase_(m_rng_),
+                .radiusAmplitude       = radAmplitude,
+                .radiusFrequency       = m_dist_radius_frequency_(m_rng_),
+                .radiusPhase           = m_dist_phase_(m_rng_),
+                .rotationSpeed         = m_dist_rotation_speed_(m_rng_)
+            };
 
-            static constexpr auto meanStarInnerRatio_ = 0.4f;
-            static constexpr auto devStarInnerRatio_ = 0.25f;
-            static constexpr auto maxStarInnerRatio_ = 0.8f;
-            static constexpr auto minStarInnerRatio_ = 0.15f;
-
-            static constexpr auto meanColorFrequency_ = 1.5f;
-            static constexpr auto devColorFrequency_ = 1.0f;
-            static constexpr auto minColorFrequency_ = 0.2f;
-            static constexpr auto maxColorFrequency_ = 1.0f;
-
-            static constexpr auto meanRadiusAmplitude_ = 0.5f;
-            static constexpr auto devRadiusAmplitude_ = 0.3f;
-            static constexpr auto minRadiusAmplitude_ = 0.1f;
-            static constexpr auto maxRadiusAmplitude_ = 0.9f;
-
-            static constexpr auto meanRadiusFrequency_ = 1.8f;
-            static constexpr auto devRadiusFrequency_ = 1.5f;
-            static constexpr auto minRadiusFrequency_ = 0.6f;
-            static constexpr auto maxRadiusFrequency_ = 4.0f;
-
-            static constexpr auto minRotationSpeed_ = -1.0f * std::numbers::pi_v<float>;
-            static constexpr auto maxRotationSpeed_ =  1.0f * std::numbers::pi_v<float>;
-        };
+            return std::make_unique<entity::Star>(desc);
+        }
 
 
     private:
-        auto GenerateStar_() -> std::unique_ptr<entity::Star>;
+        const Settings mc_settings_;
 
-
-    private:
-        std::vector<std::unique_ptr<entity::Star>> stars_;
-
-        const std::vector<D2D1_COLOR_F> colors =
+        const std::vector<D2D1_COLOR_F> m_colors =
         {
-            D2D1::ColorF{ D2D1::ColorF::Red        },
-            D2D1::ColorF{ D2D1::ColorF::Green      },
-            D2D1::ColorF{ D2D1::ColorF::Blue       },
-            D2D1::ColorF{ D2D1::ColorF::Cyan       },
-            D2D1::ColorF{ D2D1::ColorF::Yellow     },
-            D2D1::ColorF{ D2D1::ColorF::Magenta    },
-            D2D1::ColorF{ D2D1::ColorF::SandyBrown },
-            D2D1::ColorF{ D2D1::ColorF::Crimson    }
+            ::D2D1::ColorF{ ::D2D1::ColorF::Red        },
+            ::D2D1::ColorF{ ::D2D1::ColorF::Green      },
+            ::D2D1::ColorF{ ::D2D1::ColorF::Blue       },
+            ::D2D1::ColorF{ ::D2D1::ColorF::Cyan       },
+            ::D2D1::ColorF{ ::D2D1::ColorF::Yellow     },
+            ::D2D1::ColorF{ ::D2D1::ColorF::Magenta    },
+            ::D2D1::ColorF{ ::D2D1::ColorF::SandyBrown },
+            ::D2D1::ColorF{ ::D2D1::ColorF::Crimson    }
         };
 
-        std::minstd_rand rng_{ std::random_device{}() };
-        std::uniform_int_distribution<std::size_t> dist_color_{ 0u, colors.size() - 1u };
-        std::uniform_real_distribution<float> dist_phase_{ 0.0f, 2.0f * std::numbers::pi_v<float> };
+        std::minstd_rand m_rng_{ std::random_device{}() };
+        std::uniform_int_distribution<std::size_t> m_dist_color_{ 0u, m_colors.size() - 1u };
+        std::uniform_real_distribution<float> m_dist_phase_{ 0.0f, 2.0f * std::numbers::pi_v<float> };
 
-        std::uniform_real_distribution<float> dist_x_position_    { -Settings_::worldWidth_ / 2.0f, Settings_::worldWidth_ / 2.0f };
-        std::uniform_real_distribution<float> dist_y_position_    { -Settings_::worldWidth_ / 2.0f, Settings_::worldWidth_ / 2.0f };
-        std::uniform_real_distribution<float> dist_rotation_speed_{  Settings_::minRotationSpeed_,  Settings_::maxRotationSpeed_ };
+        std::uniform_real_distribution<float> m_dist_x_position_    { -mc_settings_.m_worldWidth / 2.0f, mc_settings_.m_worldWidth / 2.0f };
+        std::uniform_real_distribution<float> m_dist_y_position_    { -mc_settings_.m_worldWidth / 2.0f, mc_settings_.m_worldWidth / 2.0f };
+        std::uniform_real_distribution<float> m_dist_rotation_speed_{  mc_settings_.m_minRotationSpeed,  mc_settings_.m_maxRotationSpeed };
 
-        std::normal_distribution<float> dist_radius_          { Settings_::meanStarRadius_,      Settings_::devStarRadius_ };
-        std::normal_distribution<float> dist_radius_ratio_    { Settings_::meanStarInnerRatio_,  Settings_::devStarInnerRatio_ };
-        std::normal_distribution<float> dist_radius_amplitude_{ Settings_::meanRadiusAmplitude_, Settings_::devRadiusAmplitude_};
-        std::normal_distribution<float> dist_radius_frequency_{ Settings_::meanRadiusFrequency_, Settings_::devRadiusFrequency_};
-        std::normal_distribution<float> dist_flare_count_     { Settings_::meanFlares_,          Settings_::devFlares_ };
-        std::normal_distribution<float> dist_color_frequency_ { Settings_::meanColorFrequency_,  Settings_::devColorFrequency_ };
+        std::normal_distribution<float> m_dist_radius_          { mc_settings_.m_meanStarRadius,      mc_settings_.m_devStarRadius };
+        std::normal_distribution<float> m_dist_radius_ratio_    { mc_settings_.m_meanStarInnerRatio,  mc_settings_.m_devStarInnerRatio };
+        std::normal_distribution<float> m_dist_radius_amplitude_{ mc_settings_.m_meanRadiusAmplitude, mc_settings_.m_devRadiusAmplitude};
+        std::normal_distribution<float> m_dist_radius_frequency_{ mc_settings_.m_meanRadiusFrequency, mc_settings_.m_devRadiusFrequency};
+        std::normal_distribution<float> m_dist_flare_count_     { mc_settings_.m_meanFlares,          mc_settings_.m_devFlares };
+        std::normal_distribution<float> m_dist_color_frequency_ { mc_settings_.m_meanColorFrequency,  mc_settings_.m_devColorFrequency };
+
+        std::vector<unique_pstar> m_stars_;
     };
 }

@@ -26,7 +26,7 @@ export namespace starfield::entity
         };
         struct Descriptor final
         {
-            DirectX::XMFLOAT2 position;
+            ::DirectX::XMFLOAT2 position;
 
             RadiusPack radiuses;
 
@@ -58,26 +58,26 @@ export namespace starfield::entity
 
 
     public:
-        static auto Make(float outerRadius, float innerRadius, std::size_t nFlares = 5u) -> std::vector<DirectX::XMFLOAT2>;
+        static auto Make(const float outerRadius, const float innerRadius, const std::size_t flareCount = 5u) -> std::vector<::DirectX::XMFLOAT2>;
 
         static auto CheckCollision(const Star& star1, const Star& star2) noexcept -> bool;
 
 
     public:
-        virtual auto GetBoundingRect() const noexcept -> NAMESPACE_MATH::RectF override final;
+        virtual auto GetBoundingRect() const noexcept -> FATSPACE_MATH::RectF override final;
 
-        virtual void ApplyTransformation(const DirectX::XMMATRIX& transformer) noexcept override final;
-        virtual void UpdateTo(float total_time) noexcept override final;
-        virtual void Draw(NAMESPACE_D2D::Graphics& gfx) const noexcept override final;
+        virtual void ApplyTransformation(const ::DirectX::XMMATRIX& transformer) noexcept override final;
+        virtual void UpdateTo(const float total_time) noexcept override final;
+        virtual void Draw(FATSPACE_D2D::Graphics& gfx) const noexcept override final;
 
 
     public:
-        auto GetPos() const noexcept -> DirectX::XMFLOAT2;
+        auto GetPos() const noexcept -> ::DirectX::XMFLOAT2;
 
         auto GetMaxRadius() const noexcept -> float;
 
         auto CollidesWith(const Star& star) const noexcept -> bool;
-        auto IsWithinArea(const DirectX::XMFLOAT2& position, float radius) const noexcept -> bool;
+        auto IsWithinArea(const ::DirectX::XMFLOAT2& position, const float radius) const noexcept -> bool;
 
 
     protected:
@@ -88,12 +88,12 @@ export namespace starfield::entity
 
 
     private:
-        std::vector<DirectX::XMFLOAT2> model_;
+        std::vector<::DirectX::XMFLOAT2> m_model_;
 
-        DirectX::XMMATRIX transformation_;
+        ::DirectX::XMMATRIX m_transformation_;
 
-        Descriptor desc_;
+        Descriptor m_desc_;
 
-        D2D1_COLOR_F faded_color_;
+        D2D1_COLOR_F m_faded_color_;
     };
 }

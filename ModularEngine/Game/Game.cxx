@@ -24,55 +24,61 @@ namespace starfield
 {
     Game::Game()
         :
-        wnd_{ L"StarField", NAMESPACE_UTIL::ScreenSizeInfo{ SCREEN_WIDTH, SCREEN_HEIGHT } },
-        gfx_{ wnd_.GetHwnd(), NAMESPACE_UTIL::ScreenSizeInfo{ wnd_.GetClientWidth<UINT>(), wnd_.GetClientHeight<UINT>() }}, // they are the same as SCREEN_ MACROS
-        camera_{ gfx_ },
-        camera_controller_{ camera_, wnd_.m_mouse, wnd_.m_keyboard },
-        drawables_{ StarFactory{}.GetStars() }
+        m_wnd_{ std::make_shared<FATSPACE_WIN32::WndClassEx>(L"fat->pound WindowClassEx: " + std::to_wstring(s_game_id_++)), std::make_shared<FATSPACE_UTIL_IO::Keyboard>(), std::make_shared<FATSPACE_UTIL_IO::Mouse>(), L"StarField " + std::to_wstring(s_game_id_), FATSPACE_UTIL::ScreenSizeInfo{ SCREEN_WIDTH, SCREEN_HEIGHT } },
+        m_gfx_{ m_wnd_.GetHandle(), FATSPACE_UTIL::ScreenSizeInfo{ m_wnd_.GetClientWidth<UINT>(), m_wnd_.GetClientHeight<UINT>() }},
+        m_camera_{ m_gfx_ },
+        m_camera_controller_{ m_camera_, *m_wnd_.m_pMouse, *m_wnd_.m_pKeyboard },
+        m_drawables_{ StarFactory<>{}.GetStars()},
+        ////////////////////////////////
+#pragma region (gameloop w/o C4355)
+#pragma warning (push)
+#pragma warning (disable : 4355)
+        m_game_loop_{ &Game::Go_, this }
+#pragma warning (pop)
+#pragma endregion
+        ////////////////////////////////
     {
          
     }
 
-    auto Game::Go() -> int
+    auto Game::IsRunning() const -> bool
     {
-        std::optional<WPARAM> error_code;
+        return not IsOver();
+    }
+    auto Game::IsOver() const -> bool
+    {
+        return m_wnd_.IsClosing();
+    }
 
-        while (true)
+    void Game::Go_()
+    {
+        while (IsRunning())
         {
-            error_code = NAMESPACE_WIN32::Window::ProcessMessages();
-
-            if (error_code) [[unlikely]]
-            {
-                return static_cast<int>(*error_code);
-            }
-
-            gfx_.BeginFrame();
+            m_gfx_.BeginFrame();
             UpdateModel_();
             DoFrame_();
-            gfx_.EndFrame();
+            m_gfx_.EndFrame();
         }
     }
-
     void Game::UpdateModel_() noexcept
     {
-        const float deltaTime = timer_.Mark();
+        const auto& deltaTime = m_timer_.Mark();
 
-        totalTime_ += deltaTime;
+        m_total_time_ += deltaTime;
 
-        camera_controller_.Update(deltaTime);
+        m_camera_controller_.Update(deltaTime);
     }
-
     void Game::DoFrame_()
     {
-        const auto& viewport = camera_.GetViewportRect(gfx_);
+        const auto& viewport = m_camera_.GetViewportRect(m_gfx_);
 
-        for (auto& drawable : drawables_)
+        for (auto& drawable : m_drawables_)
         {
             if (drawable->GetBoundingRect().IsOverlappingWith(viewport))
             {
-                drawable->UpdateTo(totalTime_);
+                drawable->UpdateTo(m_total_time_);
 
-                camera_.Draw(drawable.get());
+                m_camera_.Draw(drawable.get());
             }
         }
     }

@@ -1,6 +1,6 @@
 module;
 
-#include <FatWin32_Namespaces.hpp>
+#include <FatNamespaces.hpp>
 
 #include <DirectXMath.h>
 
@@ -18,9 +18,9 @@ export namespace starfield
     class Game final
     {
     public:
-        Game();
-        Game(const Game& src) = delete;
-        Game(Game&& src) = delete;
+        explicit Game();
+        explicit Game(const Game& src) = delete;
+        explicit Game(Game&& src) = delete;
 
         auto operator = (const Game& src) -> Game& = delete;
         auto operator = (Game&& src)      -> Game& = delete;
@@ -28,28 +28,36 @@ export namespace starfield
 
 
     public:
-        auto Go() -> int;
+        auto IsRunning() const -> bool;
+        auto IsOver()    const -> bool;
 
 
     protected:
 
 
     private:
+        void Go_();
         void UpdateModel_() noexcept;
         void DoFrame_();
 
 
     private:
-        NAMESPACE_WIN32::Window wnd_;
-        NAMESPACE_D2D::Graphics gfx_;
+        inline static std::size_t s_game_id_{};
 
-        NAMESPACE_UTIL::AutoTimer timer_;
 
-        Camera camera_;
-        CameraController camera_controller_;
+    private:
+        FATSPACE_WIN32::WindowEx m_wnd_;
+        FATSPACE_D2D::Graphics m_gfx_;
 
-        std::vector<std::unique_ptr<entity::Star>> drawables_;
+        FATSPACE_UTIL_TIME::AutoTimer m_timer_;
 
-        float totalTime_ = 0.0f;
+        Camera m_camera_;
+        CameraController m_camera_controller_;
+
+        std::vector<std::unique_ptr<entity::Star>> m_drawables_;
+
+        float m_total_time_{};
+
+        std::jthread m_game_loop_;
     };
 }
