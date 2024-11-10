@@ -12,7 +12,7 @@ namespace dx = DirectX;
 
 namespace starfield
 {
-    CameraController::CameraController(Camera& camera, FATSPACE_UTIL_IO::Mouse& mouse, const FATSPACE_UTIL_IO::Keyboard& kbd) noexcept
+    CameraController::CameraController(Camera& camera, FATSPACE_IO::Mouse& mouse, const FATSPACE_IO::Keyboard& kbd) noexcept
         :
         m_camera_(camera),
         m_mouse_(mouse),
@@ -39,7 +39,7 @@ namespace starfield
 
             switch (mouseE->type)
             {
-            case FATSPACE_UTIL_IO::MouseEvent::Type::LPress:
+            case FATSPACE_IO::MouseEvent::Type::LPress:
             {
                 engaged_ = true;
                 m_last_pos_ = ::DirectX::XMFLOAT2
@@ -50,15 +50,15 @@ namespace starfield
             }
                 break;
 
-            case FATSPACE_UTIL_IO::MouseEvent::Type::LRelease:
+            case FATSPACE_IO::MouseEvent::Type::LRelease:
                 engaged_ = false;
                 break;
 
-            case FATSPACE_UTIL_IO::MouseEvent::Type::WheelUp:
+            case FATSPACE_IO::MouseEvent::Type::WheelUp:
                 m_camera_.SetScale(m_camera_.GetScale() * zoomFactor_);
                 break;
 
-            case FATSPACE_UTIL_IO::MouseEvent::Type::WheelDown:
+            case FATSPACE_IO::MouseEvent::Type::WheelDown:
                 m_camera_.SetScale(m_camera_.GetScale() / zoomFactor_);
                 break;
 

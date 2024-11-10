@@ -19,7 +19,7 @@ export namespace starfield
     class CameraController final
     {
     public:
-        explicit CameraController(Camera& camera, FATSPACE_UTIL_IO::Mouse& mouse, const FATSPACE_UTIL_IO::Keyboard& kbd) noexcept;
+        explicit CameraController(Camera& camera, FATSPACE_IO::Mouse& mouse, const FATSPACE_IO::Keyboard& kbd) noexcept;
 
         explicit CameraController() = delete;
         explicit CameraController(const CameraController& src) = delete;
@@ -40,8 +40,8 @@ export namespace starfield
     private:
         Camera& m_camera_;
 
-        FATSPACE_UTIL_IO::Mouse& m_mouse_;
-        const FATSPACE_UTIL_IO::Keyboard& m_kbd_;
+        FATSPACE_IO::Mouse& m_mouse_;
+        const FATSPACE_IO::Keyboard& m_kbd_;
 
         ::DirectX::XMFLOAT2 m_last_pos_{ 0.0f, 0.0f };
 
