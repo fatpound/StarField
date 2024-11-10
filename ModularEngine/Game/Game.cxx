@@ -54,7 +54,7 @@ namespace starfield
     {
         while (IsRunning())
         {
-            m_gfx_.BeginFrame();
+            m_gfx_.BeginFrame<false>();
             UpdateModel_();
             DoFrame_();
             m_gfx_.EndFrame();

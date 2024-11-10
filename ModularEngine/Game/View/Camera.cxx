@@ -29,9 +29,9 @@ namespace starfield
         const float zoom = 1.0f / m_scale_;
 
         const float diagonal = std::sqrt(
-            FATSPACE_MATH::Square(static_cast<float>(gfx.width_)  / 2.0f * zoom)
+            FATSPACE_MATH::Square(static_cast<float>(gfx.m_width)  / 2.0f * zoom)
             +
-            FATSPACE_MATH::Square(static_cast<float>(gfx.height_) / 2.0f * zoom)
+            FATSPACE_MATH::Square(static_cast<float>(gfx.m_height) / 2.0f * zoom)
         );
 
         return FATSPACE_MATH::RectF::FromCenter(
@@ -72,8 +72,8 @@ namespace starfield
     {
         const dx::XMFLOAT2 offset =
         {
-            static_cast<float>(m_gfx_.width_)  / 2.0f,
-            static_cast<float>(m_gfx_.height_) / 2.0f
+            static_cast<float>(m_gfx_.m_width)  / 2.0f,
+            static_cast<float>(m_gfx_.m_height) / 2.0f
         };
 
         const auto& transform =
