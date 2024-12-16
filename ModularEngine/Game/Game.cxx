@@ -57,16 +57,16 @@ namespace starfield
         while (IsRunning())
         {
             m_gfx_.BeginFrame<false>();
-            m_timer_.Stop();
             UpdateModel_();
             DoFrame_();
-            m_timer_.Start();
             m_gfx_.EndFrame();
         }
     }
     void Game::UpdateModel_() noexcept
     {
+        m_timer_.Stop();
         const auto& deltaTime = m_timer_.GetElapsed_s();
+        m_timer_.Start();
 
         m_total_time_ += deltaTime;
 
