@@ -74,6 +74,7 @@ namespace starfield
     }
     void Game::DoFrame_()
     {
+        const auto& matrix   = m_camera_.GetMatrix();
         const auto& viewport = m_camera_.GetViewportRect(m_gfx_);
 
         for (auto& drawable : m_drawables_)
@@ -81,8 +82,8 @@ namespace starfield
             if (drawable->GetBoundingRect().IsOverlappingWith(viewport))
             {
                 drawable->UpdateTo(m_total_time_);
-
-                m_camera_.Draw(drawable.get());
+                drawable->ApplyTransformation(matrix);
+                drawable->Draw(m_gfx_);
             }
         }
     }

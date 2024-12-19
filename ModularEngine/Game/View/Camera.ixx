@@ -8,8 +8,6 @@ module;
 
 export module StarField.View.Camera;
 
-import StarField.Entity.Drawable;
-
 import FatPound;
 
 import std;
@@ -31,6 +29,8 @@ export namespace starfield
 
 
     public:
+        auto GetMatrix() const -> ::DirectX::XMMATRIX;
+
         auto GetPos() const noexcept -> ::DirectX::XMFLOAT2;
 
         auto GetViewportRect(const FATSPACE_D2D::Graphics& gfx) const noexcept -> FATSPACE_MATH::RectF;
@@ -43,7 +43,7 @@ export namespace starfield
 
         void MoveBy(const ::DirectX::XMFLOAT2& offset) noexcept;
         void MoveTo(const ::DirectX::XMFLOAT2& pos) noexcept;
-        void Draw(entity::Drawable* drawable) const;
+
 
 
     protected:
@@ -53,6 +53,12 @@ export namespace starfield
         FATSPACE_D2D::Graphics& m_gfx_;
 
         ::DirectX::XMFLOAT2 m_pos_{ 0.0f, 0.0f };
+
+        const ::DirectX::XMFLOAT2 m_offset_
+        {
+            static_cast<float>(m_gfx_.mc_width)  / 2.0f,
+            static_cast<float>(m_gfx_.mc_height) / 2.0f
+        };
 
         float m_angle_ = 0.0f;
         float m_scale_ = 1.0f;

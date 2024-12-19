@@ -19,7 +19,16 @@ namespace starfield
 
     }
 
-    auto Camera::GetPos() const noexcept -> dx::XMFLOAT2
+    auto Camera::GetMatrix() const -> ::dx::XMMATRIX
+    {
+        return ::dx::XMMatrixTranslation(-m_pos_.x, -m_pos_.y, 0.0f) *
+            ::dx::XMMatrixScaling(m_scale_, m_scale_, 1.0f) *
+            ::dx::XMMatrixRotationZ(m_angle_) *
+            ::dx::XMMatrixScaling(1.0f, -1.0f, 1.0f) *
+            ::dx::XMMatrixTranslation(m_offset_.x, m_offset_.y, 0.0f);
+    }
+
+    auto Camera::GetPos() const noexcept -> ::dx::XMFLOAT2
     {
         return m_pos_;
     }
@@ -28,10 +37,10 @@ namespace starfield
     {
         const float zoom = 1.0f / m_scale_;
 
-        const float diagonal = std::sqrt(
-            FATSPACE_MATH::Square(static_cast<float>(gfx.m_width)  / 2.0f * zoom)
+        const float diagonal = ::std::sqrt(
+            FATSPACE_MATH::Square(static_cast<float>(gfx.mc_width)  / 2.0f * zoom)
             +
-            FATSPACE_MATH::Square(static_cast<float>(gfx.m_height) / 2.0f * zoom)
+            FATSPACE_MATH::Square(static_cast<float>(gfx.mc_height) / 2.0f * zoom)
         );
 
         return FATSPACE_MATH::RectF::FromCenter(
@@ -58,32 +67,14 @@ namespace starfield
     {
         m_scale_ = scale;
     }
-    void Camera::MoveBy(const dx::XMFLOAT2& offset) noexcept
+    void Camera::MoveBy(const ::dx::XMFLOAT2& offset) noexcept
     {
         m_pos_.x += offset.x;
         m_pos_.y += offset.y;
     }
-    void Camera::MoveTo(const dx::XMFLOAT2& pos) noexcept
+    void Camera::MoveTo(const ::dx::XMFLOAT2& pos) noexcept
     {
         m_pos_ = pos;
     }
 
-    void Camera::Draw(entity::Drawable* const drawable) const
-    {
-        const dx::XMFLOAT2 offset =
-        {
-            static_cast<float>(m_gfx_.m_width)  / 2.0f,
-            static_cast<float>(m_gfx_.m_height) / 2.0f
-        };
-
-        const auto& transform =
-            dx::XMMatrixTranslation(-m_pos_.x, -m_pos_.y, 0.0f) *
-            dx::XMMatrixScaling(m_scale_, m_scale_, 1.0f) *
-            dx::XMMatrixRotationZ(m_angle_) *
-            dx::XMMatrixScaling(1.0f, -1.0f, 1.0f) *
-            dx::XMMatrixTranslation(offset.x, offset.y, 0.0f);
-
-        drawable->ApplyTransformation(transform);
-        drawable->Draw(m_gfx_);
-    }
 }
