@@ -53,3 +53,5 @@ export namespace starfield
         static constexpr auto rotationSpeed_ = ::DirectX::XM_PI / 6.0f;
     };
 }
+
+module : private;

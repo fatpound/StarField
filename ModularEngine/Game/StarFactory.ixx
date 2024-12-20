@@ -163,3 +163,5 @@ export namespace starfield
         std::vector<unique_pstar> m_stars_;
     };
 }
+
+module : private;

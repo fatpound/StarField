@@ -40,3 +40,5 @@ export namespace starfield::entity
     private:
     };
 }
+
+module : private;

@@ -99,3 +99,5 @@ export namespace starfield::entity
         D2D1_COLOR_F m_faded_color_;
     };
 }
+
+module : private;
