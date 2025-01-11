@@ -12,7 +12,7 @@ module StarField.View.Camera;
 
 namespace dx = DirectX;
 
-namespace starfield
+namespace starfield::view
 {
     Camera::Camera(FATSPACE_D2D::Graphics& gfx) noexcept
         :

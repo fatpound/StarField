@@ -12,7 +12,7 @@ module StarField.View.CameraController;
 
 namespace dx = DirectX;
 
-namespace starfield
+namespace starfield::view
 {
     CameraController::CameraController(Camera& camera, FATSPACE_IO::Mouse& mouse, const FATSPACE_IO::Keyboard& kbd) noexcept
         :

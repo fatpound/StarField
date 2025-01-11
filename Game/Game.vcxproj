@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{5f87d4a7-8386-4ed2-8d5b-3c97be616cc0}</ProjectGuid>
-    <RootNamespace>ModularEngine</RootNamespace>
+    <ProjectGuid>{3fa5bba1-76ef-45b3-9690-7734d8799230}</ProjectGuid>
+    <RootNamespace>Game</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -59,46 +59,31 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\FatModules\FatCpp.props" />
-    <Import Project="..\FatModules\FatCpp_Debug.props" />
-    <Import Project="..\FatModules\FatLibrary.props" />
-    <Import Project="..\FatModules\FatLibraryM.props" />
+    <Import Project="..\FatModules\_props\FatLibraryM.props" />
+    <Import Project="..\FatModules\_props\FatCppM_Debug.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\FatModules\FatCpp.props" />
-    <Import Project="..\FatModules\FatCpp_Release.props" />
-    <Import Project="..\FatModules\FatCpp_Intrinsic.props" />
-    <Import Project="..\FatModules\FatLibrary.props" />
-    <Import Project="..\FatModules\FatLibraryM.props" />
+    <Import Project="..\FatModules\_props\FatLibraryM.props" />
+    <Import Project="..\FatModules\_props\FatCppM_Release.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\FatModules\FatCpp.props" />
-    <Import Project="..\FatModules\FatCpp_Debug.props" />
-    <Import Project="..\FatModules\FatLibrary.props" />
-    <Import Project="..\FatModules\FatLibraryM.props" />
+    <Import Project="..\FatModules\_props\FatLibraryM.props" />
+    <Import Project="..\FatModules\_props\FatCppM_Debug.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\FatModules\FatCpp.props" />
-    <Import Project="..\FatModules\FatCpp_Release.props" />
-    <Import Project="..\FatModules\FatCpp_Intrinsic.props" />
-    <Import Project="..\FatModules\FatLibrary.props" />
-    <Import Project="..\FatModules\FatLibraryM.props" />
+    <Import Project="..\FatModules\_props\FatLibraryM.props" />
+    <Import Project="..\FatModules\_props\FatCppM_Release.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <TreatWarningAsError>false</TreatWarningAsError>
-      <ModuleOutputFile>$(IntDir)%(RelativeDir)</ModuleOutputFile>
-      <ModuleDependenciesFile>$(IntDir)%(RelativeDir)</ModuleDependenciesFile>
-      <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
-      <XMLDocumentationFileName>$(IntDir)%(RelativeDir)</XMLDocumentationFileName>
-      <SourceDependenciesFile>$(IntDir)%(RelativeDir)</SourceDependenciesFile>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -107,16 +92,12 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <ModuleOutputFile>$(IntDir)%(RelativeDir)</ModuleOutputFile>
-      <ModuleDependenciesFile>$(IntDir)%(RelativeDir)</ModuleDependenciesFile>
-      <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
-      <XMLDocumentationFileName>$(IntDir)%(RelativeDir)</XMLDocumentationFileName>
-      <SourceDependenciesFile>$(IntDir)%(RelativeDir)</SourceDependenciesFile>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -127,15 +108,10 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <TreatWarningAsError>false</TreatWarningAsError>
-      <ModuleOutputFile>$(IntDir)%(RelativeDir)</ModuleOutputFile>
-      <ModuleDependenciesFile>$(IntDir)%(RelativeDir)</ModuleDependenciesFile>
-      <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
-      <XMLDocumentationFileName>$(IntDir)%(RelativeDir)</XMLDocumentationFileName>
-      <SourceDependenciesFile>$(IntDir)%(RelativeDir)</SourceDependenciesFile>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -144,16 +120,12 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <ModuleOutputFile>$(IntDir)%(RelativeDir)</ModuleOutputFile>
-      <ModuleDependenciesFile>$(IntDir)%(RelativeDir)</ModuleDependenciesFile>
-      <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
-      <XMLDocumentationFileName>$(IntDir)%(RelativeDir)</XMLDocumentationFileName>
-      <SourceDependenciesFile>$(IntDir)%(RelativeDir)</SourceDependenciesFile>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -163,18 +135,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Game\Entity\Drawable.ixx" />
-    <ClCompile Include="Game\Entity\Entity.ixx" />
-    <ClCompile Include="Game\Entity\Star.cxx" />
-    <ClCompile Include="Game\Entity\Star.ixx" />
-    <ClCompile Include="Game\Game.cxx" />
-    <ClCompile Include="Game\Game.ixx" />
-    <ClCompile Include="Game\StarFactory.ixx" />
-    <ClCompile Include="Game\View\Camera.cxx" />
-    <ClCompile Include="Game\View\Camera.ixx" />
-    <ClCompile Include="Game\View\CameraController.cxx" />
-    <ClCompile Include="Game\View\CameraController.ixx" />
-    <ClCompile Include="Game\View\View.ixx" />
+    <ClCompile Include="Entity\Drawable.ixx" />
+    <ClCompile Include="Entity\Entity.ixx" />
+    <ClCompile Include="Entity\Star.cxx" />
+    <ClCompile Include="Entity\Star.ixx" />
+    <ClCompile Include="StarField.cxx" />
+    <ClCompile Include="StarField.ixx" />
+    <ClCompile Include="StarFactory.ixx" />
+    <ClCompile Include="View\Camera.cxx" />
+    <ClCompile Include="View\Camera.ixx" />
+    <ClCompile Include="View\CameraController.cxx" />
+    <ClCompile Include="View\CameraController.ixx" />
+    <ClCompile Include="View\View.ixx" />
     <ClCompile Include="wWinMain.cpp" />
   </ItemGroup>
   <ItemGroup>

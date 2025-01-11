@@ -51,8 +51,8 @@ export namespace starfield
 
         FATSPACE_UTIL::Timer m_timer_;
 
-        Camera m_camera_;
-        CameraController m_camera_controller_;
+        view::Camera m_camera_;
+        view::CameraController m_camera_controller_;
 
         std::vector<std::unique_ptr<entity::Star>> m_drawables_;
 

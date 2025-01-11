@@ -15,40 +15,40 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Game\Entity\Drawable.ixx">
+    <ClCompile Include="Entity\Drawable.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Entity\Entity.ixx">
+    <ClCompile Include="Entity\Entity.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Entity\Star.cxx">
+    <ClCompile Include="Entity\Star.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Entity\Star.ixx">
+    <ClCompile Include="Entity\Star.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Game.cxx">
+    <ClCompile Include="View\Camera.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Game.ixx">
+    <ClCompile Include="View\Camera.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game\StarFactory.ixx">
+    <ClCompile Include="View\CameraController.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game\View\Camera.cxx">
+    <ClCompile Include="View\CameraController.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game\View\Camera.ixx">
+    <ClCompile Include="View\View.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game\View\CameraController.cxx">
+    <ClCompile Include="StarField.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game\View\CameraController.ixx">
+    <ClCompile Include="StarField.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game\View\View.ixx">
+    <ClCompile Include="StarFactory.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="wWinMain.cpp">

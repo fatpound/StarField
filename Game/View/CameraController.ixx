@@ -16,7 +16,7 @@ import FatPound;
 
 import std;
 
-export namespace starfield
+export namespace starfield::view
 {
     class CameraController final
     {
