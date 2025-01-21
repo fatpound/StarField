@@ -139,8 +139,8 @@
     <ClCompile Include="Entity\Entity.ixx" />
     <ClCompile Include="Entity\Star.cxx" />
     <ClCompile Include="Entity\Star.ixx" />
-    <ClCompile Include="StarField.cxx" />
-    <ClCompile Include="StarField.ixx" />
+    <ClCompile Include="Game.cxx" />
+    <ClCompile Include="Game.ixx" />
     <ClCompile Include="StarFactory.ixx" />
     <ClCompile Include="View\Camera.cxx" />
     <ClCompile Include="View\Camera.ixx" />

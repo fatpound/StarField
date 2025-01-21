@@ -42,10 +42,10 @@
     <ClCompile Include="View\View.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="StarField.cxx">
+    <ClCompile Include="Game.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="StarField.ixx">
+    <ClCompile Include="Game.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="StarFactory.ixx">

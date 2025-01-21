@@ -71,8 +71,6 @@ namespace starfield::view
 
         if (engaged_)
         {
-            // I have to delete this file and use FatModules' Camera system
-
             const auto& pos = m_mouse_.GetPos();
 
             const auto& lastPositionVec = ::dx::XMLoadFloat2(&m_last_pos_);
