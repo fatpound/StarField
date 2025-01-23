@@ -6,8 +6,6 @@ module;
 
 #include <DirectXMath.h>
 
-#include <d2d1.h>
-
 #if IN_RELEASE
 #define SCREEN_WIDTH    static_cast<UINT>(GetSystemMetrics(SM_CXSCREEN))
 #define SCREEN_HEIGHT   static_cast<UINT>(GetSystemMetrics(SM_CYSCREEN))
@@ -18,19 +16,17 @@ module;
 
 module StarField;
 
-import StarField.StarFactory;
-
 namespace dx = DirectX;
 
 namespace starfield
 {
-    Game::Game()
+    Game::Game(const Settings& settings)
         :
         m_wnd_{ std::make_shared<FATSPACE_WIN32::WndClassEx>(L"fat->pound WindowClassEx: " + std::to_wstring(s_game_id_++)), L"StarField " + std::to_wstring(s_game_id_), FATSPACE_UTIL::ScreenSizeInfo{ SCREEN_WIDTH, SCREEN_HEIGHT } },
         m_gfx_{ m_wnd_.GetHandle(), FATSPACE_UTIL::ScreenSizeInfo{ m_wnd_.GetClientWidth<UINT>(), m_wnd_.GetClientHeight<UINT>() }},
         m_camera_{ m_gfx_ },
         m_camera_controller_{ m_camera_, *m_wnd_.m_pMouse, *m_wnd_.m_pKeyboard },
-        m_drawables_{ StarFactory<>{}.GetStars()},
+        m_drawables_{ StarFactory<>{settings}.GetStars() },
         ////////////////////////////////
 #pragma region (gameloop w/o C4355)
 #pragma warning (push)

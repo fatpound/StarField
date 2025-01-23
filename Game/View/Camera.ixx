@@ -58,8 +58,8 @@ export namespace starfield::view
 
         const ::DirectX::XMFLOAT2 m_offset_
         {
-            static_cast<float>(m_gfx_.mc_width)  / 2.0f,
-            static_cast<float>(m_gfx_.mc_height) / 2.0f
+            m_gfx_.GetWidth<float>()  / 2.0f,
+            m_gfx_.GetHeight<float>() / 2.0f
         };
 
         float m_angle_ = 0.0f;

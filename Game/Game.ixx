@@ -2,12 +2,17 @@ module;
 
 #include <FatNamespaces.hpp>
 
+#include <FatWin32.hpp>
+
+#include <d2d1.h>
+
 #include <DirectXMath.h>
 
 export module StarField;
 
 import StarField.Entity;
 import StarField.View;
+import StarField.StarFactory;
 
 import FatPound;
 
@@ -17,8 +22,11 @@ export namespace starfield
 {
     class Game final
     {
+        using Settings = StarFactory<>::Settings;
+
     public:
-        explicit Game();
+        explicit Game(const Settings& settings = {});
+
         explicit Game(const Game& src) = delete;
         explicit Game(Game&& src) = delete;
 

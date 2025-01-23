@@ -25,8 +25,21 @@ export namespace starfield
         using unique_pstar = std::unique_ptr<entity::Star>;
 
     public:
+        using Color_t = D2D1_COLOR_F;
+
+
+    public:
         struct Settings final
         {
+            Settings(const std::vector<Color_t>& colors)
+                :
+                m_colors(colors)
+            {
+                
+            }
+
+            Settings() = default;
+
             size_t m_starCount     = 500ull;
             size_t m_minFlareCount =   2ull;
             size_t m_maxFlareCount =  10ull;
@@ -64,6 +77,18 @@ export namespace starfield
 
             float_t m_minRotationSpeed = -1.0f * ::std::numbers::pi_v<float_t>;
             float_t m_maxRotationSpeed =  1.0f * ::std::numbers::pi_v<float_t>;
+
+            std::vector<Color_t> m_colors =
+            {
+                ::D2D1::ColorF{ ::D2D1::ColorF::Red        },
+                ::D2D1::ColorF{ ::D2D1::ColorF::Green      },
+                ::D2D1::ColorF{ ::D2D1::ColorF::Blue       },
+                ::D2D1::ColorF{ ::D2D1::ColorF::Cyan       },
+                ::D2D1::ColorF{ ::D2D1::ColorF::Yellow     },
+                ::D2D1::ColorF{ ::D2D1::ColorF::Magenta    },
+                ::D2D1::ColorF{ ::D2D1::ColorF::SandyBrown },
+                ::D2D1::ColorF{ ::D2D1::ColorF::Crimson    }
+            };
         };
 
 
@@ -79,9 +104,9 @@ export namespace starfield
                 m_stars_.push_back(GenerateStar_());
             }
         }
-        //
+        
         explicit StarFactory(const StarFactory& src) = delete;
-        explicit StarFactory(StarFactory&& src) = delete;
+        explicit StarFactory(StarFactory&& src)      = delete;
 
         auto operator = (const StarFactory& src) -> StarFactory& = delete;
         auto operator = (StarFactory&& src)      -> StarFactory& = delete;
@@ -116,7 +141,7 @@ export namespace starfield
             entity::Star::Descriptor desc{
                 .position              = starPosition,
                 .radiuses              = { radius, radius * std::clamp(m_dist_radius_ratio_(m_rng_), mc_settings_.m_minStarInnerRatio, mc_settings_.m_maxStarInnerRatio) },
-                .color                 = m_colors[m_dist_color_(m_rng_)],
+                .color                 = mc_settings_.m_colors[m_dist_color_(m_rng_)],
                 .flareCount            = std::clamp(static_cast<size_t>(m_dist_flare_count_(m_rng_)), mc_settings_.m_minFlareCount, mc_settings_.m_maxFlareCount),
                 .colorFrequency        = std::clamp(m_dist_color_frequency_(m_rng_), mc_settings_.m_minColorFrequency, mc_settings_.m_maxColorFrequency),
                 .colorPhase            = m_dist_phase_(m_rng_),
@@ -133,20 +158,8 @@ export namespace starfield
     private:
         const Settings mc_settings_;
 
-        const std::vector<D2D1_COLOR_F> m_colors =
-        {
-            ::D2D1::ColorF{ ::D2D1::ColorF::Red        },
-            ::D2D1::ColorF{ ::D2D1::ColorF::Green      },
-            ::D2D1::ColorF{ ::D2D1::ColorF::Blue       },
-            ::D2D1::ColorF{ ::D2D1::ColorF::Cyan       },
-            ::D2D1::ColorF{ ::D2D1::ColorF::Yellow     },
-            ::D2D1::ColorF{ ::D2D1::ColorF::Magenta    },
-            ::D2D1::ColorF{ ::D2D1::ColorF::SandyBrown },
-            ::D2D1::ColorF{ ::D2D1::ColorF::Crimson    }
-        };
-
         std::minstd_rand m_rng_{ std::random_device{}() };
-        std::uniform_int_distribution<std::size_t> m_dist_color_{ 0u, m_colors.size() - 1u };
+        std::uniform_int_distribution<std::size_t> m_dist_color_{ 0u, mc_settings_.m_colors.size() - 1u };
         std::uniform_real_distribution<float> m_dist_phase_{ 0.0f, 2.0f * std::numbers::pi_v<float> };
 
         std::uniform_real_distribution<float> m_dist_x_position_    { -mc_settings_.m_worldWidth / 2.0f, mc_settings_.m_worldWidth / 2.0f };
