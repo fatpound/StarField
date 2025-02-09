@@ -131,7 +131,7 @@ export namespace starfield
             const auto starPosition = dx::XMFLOAT2{ m_dist_x_position_(m_rng_), m_dist_y_position_(m_rng_) };
             const auto radius       = std::clamp(m_dist_radius_(m_rng_), mc_settings_.m_minStarRadius, mc_settings_.m_maxStarRadius);
             const auto radAmplitude = std::clamp(m_dist_radius_amplitude_(m_rng_), mc_settings_.m_minRadiusAmplitude, mc_settings_.m_maxRadiusAmplitude);
-            const auto&& maxRadius  = radius * (1.0f + radAmplitude);
+            const auto maxRadius    = radius * (1.0f + radAmplitude);
 
             if (std::ranges::any_of(m_stars_, [&](const auto& pstar) noexcept -> bool { return pstar->IsWithinArea(starPosition, maxRadius); }))
             {
