@@ -17,13 +17,13 @@ export namespace starfield::entity
     class Drawable
     {
     public:
-        Drawable() = default;
-        Drawable(const Drawable& src) = delete;
-        Drawable(Drawable&& src) = delete;
+        Drawable()                    = default;
+        Drawable(const Drawable&)     = delete;
+        Drawable(Drawable&&) noexcept = delete;
 
-        auto operator = (const Drawable& src) -> Drawable& = delete;
-        auto operator = (Drawable&& src)      -> Drawable& = delete;
-        virtual ~Drawable() noexcept = default;
+        auto operator = (const Drawable&)     -> Drawable& = delete;
+        auto operator = (Drawable&&) noexcept -> Drawable& = delete;
+        virtual ~Drawable() noexcept                       = default;
 
 
     public:

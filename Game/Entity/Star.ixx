@@ -50,13 +50,13 @@ export namespace starfield::entity
     public:
         Star(const Descriptor& desc);
 
-        Star() = delete;
-        Star(const Star& src) = delete;
-        Star(Star&& src) = delete;
+        Star()                = delete;
+        Star(const Star&)     = delete;
+        Star(Star&&) noexcept = delete;
 
-        auto operator = (const Star& src) -> Star& = delete;
-        auto operator = (Star&& src) -> Star& = delete;
-        virtual ~Star() noexcept = default;
+        auto operator = (const Star&)     -> Star& = delete;
+        auto operator = (Star&&) noexcept -> Star& = delete;
+        virtual ~Star() noexcept                   = default;
 
 
     public:

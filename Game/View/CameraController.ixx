@@ -23,13 +23,13 @@ export namespace starfield::view
     public:
         explicit CameraController(Camera& camera, FATSPACE_IO::Mouse& mouse, const FATSPACE_IO::Keyboard& kbd) noexcept;
 
-        explicit CameraController() = delete;
-        explicit CameraController(const CameraController& src) = delete;
-        explicit CameraController(CameraController&& src) = delete;
+        explicit CameraController()                            = delete;
+        explicit CameraController(const CameraController&)     = delete;
+        explicit CameraController(CameraController&&) noexcept = delete;
 
-        auto operator = (const CameraController& src) -> CameraController& = delete;
-        auto operator = (CameraController&& src)      -> CameraController& = delete;
-        ~CameraController() noexcept = default;
+        auto operator = (const CameraController&)     -> CameraController& = delete;
+        auto operator = (CameraController&&) noexcept -> CameraController& = delete;
+        ~CameraController() noexcept                                       = default;
 
 
     public:

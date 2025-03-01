@@ -21,13 +21,13 @@ export namespace starfield::view
     public:
         explicit Camera(FATSPACE_D2D::Graphics& gfx) noexcept;
 
-        explicit Camera() = delete;
-        explicit Camera(const Camera& src) = delete;
-        explicit Camera(Camera&& src) = delete;
+        explicit Camera()                  = delete;
+        explicit Camera(const Camera&)     = delete;
+        explicit Camera(Camera&&) noexcept = delete;
 
-        auto operator = (const Camera& src) -> Camera& = delete;
-        auto operator = (Camera&& src)      -> Camera& = delete;
-        ~Camera() noexcept = default;
+        auto operator = (const Camera&)     -> Camera& = delete;
+        auto operator = (Camera&&) noexcept -> Camera& = delete;
+        ~Camera() noexcept                             = default;
 
 
     public:

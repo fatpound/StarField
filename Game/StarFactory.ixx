@@ -105,12 +105,12 @@ export namespace starfield
             }
         }
         
-        explicit StarFactory(const StarFactory& src) = delete;
-        explicit StarFactory(StarFactory&& src)      = delete;
+        explicit StarFactory(const StarFactory&)     = delete;
+        explicit StarFactory(StarFactory&&) noexcept = delete;
 
-        auto operator = (const StarFactory& src) -> StarFactory& = delete;
-        auto operator = (StarFactory&& src)      -> StarFactory& = delete;
-        ~StarFactory() noexcept = default;
+        auto operator = (const StarFactory&)     -> StarFactory& = delete;
+        auto operator = (StarFactory&&) noexcept -> StarFactory& = delete;
+        ~StarFactory() noexcept                                  = default;
 
 
     public:
