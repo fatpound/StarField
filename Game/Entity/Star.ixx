@@ -66,7 +66,7 @@ export namespace starfield::entity
 
 
     public:
-        virtual auto GetBoundingRect() const noexcept -> FATSPACE_MATH::RectF override final;
+        virtual auto GetBoundingRect() const noexcept -> FATSPACE_MATH::Rect<float> override final;
 
         virtual void ApplyTransformation(const ::DirectX::XMMATRIX& transformer) noexcept override final;
         virtual void UpdateTo(const float total_time) noexcept override final;

@@ -59,9 +59,14 @@ namespace starfield::entity
         return star1.CollidesWith(star2);
     }
 
-    auto Star::GetBoundingRect() const noexcept -> FATSPACE_MATH::RectF
+    auto Star::GetBoundingRect() const noexcept -> FATSPACE_MATH::Rect<float>
     {
-        return FATSPACE_MATH::RectF::FromCenter(m_desc_.position, m_desc_.radiuses.outer_radius, m_desc_.radiuses.outer_radius);
+        return FATSPACE_MATH::Rect<float>::FromCenter(
+            m_desc_.position.x,
+            m_desc_.position.y,
+            m_desc_.radiuses.outer_radius,
+            m_desc_.radiuses.outer_radius
+        );
     }
 
     void Star::ApplyTransformation(const dx::XMMATRIX& transformer) noexcept

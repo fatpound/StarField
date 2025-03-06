@@ -35,7 +35,7 @@ export namespace starfield::view
 
         auto GetPos() const noexcept -> ::DirectX::XMFLOAT2;
 
-        auto GetViewportRect(const FATSPACE_D2D::Graphics& gfx) const noexcept -> FATSPACE_MATH::RectF;
+        auto GetViewportRect(const FATSPACE_D2D::Graphics& gfx) const noexcept -> FATSPACE_MATH::Rect<float>;
 
         auto GetAngle() const noexcept -> float;
         auto GetScale() const noexcept -> float;
