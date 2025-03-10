@@ -2,8 +2,10 @@
 // fatpound //
 /*          */
 
+#include <FatNamespaces.hpp>
 #include <FatWin32.hpp>
 
+import FatPound;
 import StarField;
 
 import std;
@@ -16,27 +18,40 @@ int APIENTRY wWinMain(
     [[maybe_unused]] _In_     LPWSTR    lpCmdLine,
     [[maybe_unused]] _In_     int       nShowCmd)
 {
+    try
+    {
 #if IN_DEBUG
-    constexpr auto gameCount = 4;
+        constexpr auto gameCount = 4;
 #else
-    constexpr auto gameCount = 1;
+        constexpr auto gameCount = 1;
 #endif // IN_DEBUG
 
-    std::vector<std::unique_ptr<starfield::Game>> games;
+        std::vector<std::unique_ptr<starfield::Game>> games;
 
-    games.reserve(gameCount);
+        games.reserve(gameCount);
 
-    for (auto i = 0; i < gameCount; ++i)
+        for (auto i = 0; i < gameCount; ++i)
+        {
+            games.push_back(std::make_unique<starfield::Game>());
+        }
+
+        while (not games.empty())
+        {
+            std::erase_if(games, [](auto& pGame) noexcept -> bool { return pGame->IsOver(); });
+
+            std::this_thread::sleep_for(100ms);
+        }
+
+        return 0;
+    }
+    catch (const std::exception& ex)
     {
-        games.push_back(std::make_unique<starfield::Game>());
+        ::MessageBox(nullptr, FATSPACE_UTIL::ToWString(ex.what()).c_str(), L"Error!", MB_OK | MB_ICONERROR);
+    }
+    catch (...)
+    {
+        ::MessageBox(nullptr, L"Non-STD Exception was thrown!", L"Error...", MB_OK | MB_ICONERROR);
     }
 
-    while (not games.empty())
-    {
-        std::erase_if(games, [](auto& pGame) noexcept -> bool { return pGame->IsOver(); });
-
-        std::this_thread::sleep_for(100ms);
-    }
-
-    return 0;
+    return -1;
 }
