@@ -12,7 +12,7 @@ Install the Desktop development with C++ workload in Visual Studio Installer alo
 the experimental Modules support.\
 Install Game Programming with C++ workload.\
 Open Visual Studio.\
-Clone the repo to Visual Studio.\
+Clone the repo to Visual Studio as described in FatModules repo.\
 Select "Show All Files" in the Solution Explorer window. (Optional)\
 Then you can build the project. (Select Release, not Debug)
 
