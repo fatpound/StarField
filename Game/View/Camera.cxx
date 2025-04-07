@@ -6,8 +6,6 @@ module;
 
 #include <DirectXMath.h>
 
-#include <d2d1.h>
-
 module StarField.View.Camera;
 
 namespace dx = DirectX;

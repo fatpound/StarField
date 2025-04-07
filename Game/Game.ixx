@@ -4,11 +4,11 @@ module;
 
 #include <FatWin32.hpp>
 
-#include <d2d1.h>
-
 #include <DirectXMath.h>
 
 export module StarField;
+
+import <d2d1.h>;
 
 import StarField.Entity;
 import StarField.View;

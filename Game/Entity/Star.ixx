@@ -6,9 +6,9 @@ module;
 
 #include <DirectXMath.h>
 
-#include <d2d1.h>
-
 export module StarField.Entity.Star;
+
+import <d2d1.h>;
 
 import StarField.Entity.Drawable;
 
