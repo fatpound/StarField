@@ -61,7 +61,7 @@ export namespace starfield::view
                 case FATSPACE_IO::MouseEvent::Type::LPress:
                 {
                     engaged_ = true;
-                    m_last_pos_ = ::DirectX::XMFLOAT2
+                    m_last_pos_ = ::dx::XMFLOAT2
                     {
                         static_cast<float>(mouseE->pos_x),
                         static_cast<float>(mouseE->pos_y)
@@ -126,11 +126,11 @@ export namespace starfield::view
         FATSPACE_IO::Mouse& m_mouse_;
         const FATSPACE_IO::Keyboard& m_kbd_;
 
-        ::DirectX::XMFLOAT2 m_last_pos_{ 0.0f, 0.0f };
+        ::dx::XMFLOAT2 m_last_pos_{ 0.0f, 0.0f };
 
         bool engaged_{};
 
         static constexpr auto zoomFactor_ = 1.05f;
-        static constexpr auto rotationSpeed_ = ::DirectX::XM_PI / 6.0f;
+        static constexpr auto rotationSpeed_ = ::dx::XM_PI / 6.0f;
     };
 }
