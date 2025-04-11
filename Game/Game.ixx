@@ -69,5 +69,3 @@ export namespace starfield
         std::jthread m_game_loop_;
     };
 }
-
-module : private;

@@ -66,5 +66,3 @@ export namespace starfield::view
         float m_scale_ = 1.0f;
     };
 }
-
-module : private;
