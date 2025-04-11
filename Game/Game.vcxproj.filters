@@ -21,28 +21,16 @@
     <ClCompile Include="Entity\Entity.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Entity\Star.cxx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity\Star.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="View\Camera.cxx">
+    <ClCompile Include="Entity\Star\Star.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="View\Camera.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="View\CameraController.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="View\CameraController.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="View\View.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game.ixx">
@@ -52,6 +40,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="wWinMain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="View\Camera.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

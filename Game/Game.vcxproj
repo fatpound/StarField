@@ -153,14 +153,11 @@
   <ItemGroup>
     <ClCompile Include="Entity\Drawable.ixx" />
     <ClCompile Include="Entity\Entity.ixx" />
-    <ClCompile Include="Entity\Star.cxx" />
-    <ClCompile Include="Entity\Star.ixx" />
-    <ClCompile Include="Game.cxx" />
+    <ClCompile Include="Entity\Star\Star.ixx" />
     <ClCompile Include="Game.ixx" />
     <ClCompile Include="StarFactory.ixx" />
     <ClCompile Include="View\Camera.cxx" />
     <ClCompile Include="View\Camera.ixx" />
-    <ClCompile Include="View\CameraController.cxx" />
     <ClCompile Include="View\CameraController.ixx" />
     <ClCompile Include="View\View.ixx" />
     <ClCompile Include="wWinMain.cpp" />
