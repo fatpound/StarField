@@ -69,7 +69,7 @@ export namespace starfield::entity
     public:
         static auto Make(const float outerRadius, const float innerRadius, const ::std::size_t& flareCount = 5U) -> ::std::vector<::dx::XMFLOAT2>
         {
-            ::std::vector<dx::XMFLOAT2> star;
+            ::std::vector<::dx::XMFLOAT2> star;
 
             const ::std::size_t vertexCount = flareCount * 2u;
             star.reserve(vertexCount);
@@ -124,9 +124,9 @@ export namespace starfield::entity
             const float scale = 1.0F + radiusOffset;
             const float angle = m_desc_.rotationSpeed * total_time;
 
-            const auto& translation = dx::XMMatrixTranslation(m_desc_.position.x, m_desc_.position.y, 0.0F);
-            const auto& rotation = dx::XMMatrixRotationZ(angle);
-            const auto& scaling = dx::XMMatrixScaling(scale, scale, 1.0F);
+            const auto& translation = ::dx::XMMatrixTranslation(m_desc_.position.x, m_desc_.position.y, 0.0F);
+            const auto& rotation    = ::dx::XMMatrixRotationZ(angle);
+            const auto& scaling     = ::dx::XMMatrixScaling(scale, scale, 1.0F);
 
             m_transformation_ = rotation * translation * scaling;
 
