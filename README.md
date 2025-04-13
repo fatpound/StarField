@@ -11,10 +11,11 @@ Install the latest version of Visual Studio 2022.\
 Install the Desktop development with C++ workload in Visual Studio Installer along with\
 the experimental Modules support.\
 Install Game Programming with C++ workload.\
-Open Visual Studio.\
-Clone the repo to Visual Studio as described in FatModules repo.\
-Select "Show All Files" in the Solution Explorer window. (Optional)\
-Then you can build the project. (Select Release, not Debug)
+Clone this repo with this git command: `git clone --recursive https://github.com/fatpound/StarField.git`.\
+Open the StarField.sln file.\
+Select "Show All Files" in the Solution Explorer window.\
+Select `Game` as startup project.\
+Then you can build the project. (You should select Release, not Debug)
 
 About The Project
 -----------------
