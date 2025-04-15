@@ -159,7 +159,9 @@ export namespace starfield::entity
         }
         auto IsWithinArea(const ::dx::XMFLOAT2& position, const float radius) const noexcept -> bool
         {
-            const auto& distance  = FATSPACE_MATH::GetDistanceBetweenXMF2(this->GetPos(), position);
+            using FATSPACE_MATH::operator -;
+
+            const auto& distance  = this->GetPos() - position;
             const auto& maxradsum = this->GetMaxRadius() + radius;
 
             return maxradsum > distance;
