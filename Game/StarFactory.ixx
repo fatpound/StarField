@@ -73,8 +73,8 @@ export namespace starfield
             float_t m_minRadiusFrequency  = 0.6f;
             float_t m_maxRadiusFrequency  = 4.0f;
 
-            float_t m_minRotationSpeed = -1.0f * ::std::numbers::pi_v<float_t>;
-            float_t m_maxRotationSpeed =  1.0f * ::std::numbers::pi_v<float_t>;
+            float_t m_minRotationSpeed = -1.0f * std::numbers::pi_v<float_t>;
+            float_t m_maxRotationSpeed =  1.0f * std::numbers::pi_v<float_t>;
 
             std::vector<Color_t> m_colors =
             {

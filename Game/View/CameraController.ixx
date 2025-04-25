@@ -61,7 +61,7 @@ export namespace starfield::view
                 case FATSPACE_IO::MouseEvent::Type::LPress:
                 {
                     engaged_ = true;
-                    m_last_pos_ = ::dx::XMFLOAT2
+                    m_last_pos_ = dx::XMFLOAT2
                     {
                         static_cast<float>(mouseE->pos_x),
                         static_cast<float>(mouseE->pos_y)
@@ -90,25 +90,25 @@ export namespace starfield::view
             {
                 const auto& pos = m_mouse_.GetPos();
 
-                const auto& lastPositionVec = ::dx::XMLoadFloat2(&m_last_pos_);
-                const auto& currentPosition = ::dx::XMFLOAT2{ static_cast<float>(pos.first), static_cast<float>(pos.second) };
+                const auto& lastPositionVec = dx::XMLoadFloat2(&m_last_pos_);
+                const auto& currentPosition = dx::XMFLOAT2{ static_cast<float>(pos.first), static_cast<float>(pos.second) };
 
                 const auto& currentPositionVec = dx::XMLoadFloat2(&currentPosition);
-                auto deltaPositionVec = ::dx::XMVectorSubtract(currentPositionVec, lastPositionVec);
+                auto deltaPositionVec = dx::XMVectorSubtract(currentPositionVec, lastPositionVec);
 
-                deltaPositionVec = ::dx::XMVectorSetX(deltaPositionVec, -::dx::XMVectorGetX(deltaPositionVec));
+                deltaPositionVec = dx::XMVectorSetX(deltaPositionVec, -dx::XMVectorGetX(deltaPositionVec));
 
                 const auto angle = -m_camera_.GetAngle();
 
-                const auto& rotationMatrix = ::dx::XMMatrixRotationZ(angle);
+                const auto& rotationMatrix = dx::XMMatrixRotationZ(angle);
 
-                deltaPositionVec = ::dx::XMVector2TransformCoord(deltaPositionVec, rotationMatrix);
+                deltaPositionVec = dx::XMVector2TransformCoord(deltaPositionVec, rotationMatrix);
 
-                const auto& scaleVec = ::dx::XMVectorReplicate(1.0f / m_camera_.GetScale());
-                deltaPositionVec = ::dx::XMVectorMultiply(deltaPositionVec, scaleVec);
+                const auto& scaleVec = dx::XMVectorReplicate(1.0f / m_camera_.GetScale());
+                deltaPositionVec = dx::XMVectorMultiply(deltaPositionVec, scaleVec);
 
-                ::dx::XMFLOAT2 deltaPosition;
-                ::dx::XMStoreFloat2(&deltaPosition, deltaPositionVec);
+                dx::XMFLOAT2 deltaPosition;
+                dx::XMStoreFloat2(&deltaPosition, deltaPositionVec);
 
                 m_camera_.MoveBy(deltaPosition);
 
@@ -126,11 +126,11 @@ export namespace starfield::view
         FATSPACE_IO::Mouse& m_mouse_;
         const FATSPACE_IO::Keyboard& m_kbd_;
 
-        ::dx::XMFLOAT2 m_last_pos_{ 0.0f, 0.0f };
+        dx::XMFLOAT2 m_last_pos_{ 0.0f, 0.0f };
 
         bool engaged_{};
 
         static constexpr auto zoomFactor_ = 1.05f;
-        static constexpr auto rotationSpeed_ = ::dx::XM_PI / 6.0f;
+        static constexpr auto rotationSpeed_ = dx::XM_PI / 6.0f;
     };
 }

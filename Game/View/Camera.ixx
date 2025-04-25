@@ -36,16 +36,16 @@ export namespace starfield::view
 
 
     public:
-        auto GetMatrix() const -> ::dx::XMMATRIX
+        auto GetMatrix() const -> dx::XMMATRIX
         {
-            return ::dx::XMMatrixTranslation(-m_pos_.x, -m_pos_.y, 0.0f) *
-                ::dx::XMMatrixScaling(m_scale_, m_scale_, 1.0f) *
-                ::dx::XMMatrixRotationZ(m_angle_) *
-                ::dx::XMMatrixScaling(1.0f, -1.0f, 1.0f) *
-                ::dx::XMMatrixTranslation(m_offset_.x, m_offset_.y, 0.0f);
+            return dx::XMMatrixTranslation(-m_pos_.x, -m_pos_.y, 0.0f) *
+                dx::XMMatrixScaling(m_scale_, m_scale_, 1.0f) *
+                dx::XMMatrixRotationZ(m_angle_) *
+                dx::XMMatrixScaling(1.0f, -1.0f, 1.0f) *
+                dx::XMMatrixTranslation(m_offset_.x, m_offset_.y, 0.0f);
         }
 
-        auto GetPos() const noexcept -> ::dx::XMFLOAT2
+        auto GetPos() const noexcept -> dx::XMFLOAT2
         {
             return m_pos_;
         }
@@ -54,7 +54,7 @@ export namespace starfield::view
         {
             const auto& zoom = 1.0f / m_scale_;
 
-            const auto& diagonal = ::std::sqrt(
+            const auto& diagonal = std::sqrt(
                 FATSPACE_MATH::Square(m_gfx_.GetWidth<float>()  / 2.0f * zoom)
                 +
                 FATSPACE_MATH::Square(m_gfx_.GetHeight<float>() / 2.0f * zoom)
@@ -86,12 +86,12 @@ export namespace starfield::view
             m_scale_ = scale;
         }
 
-        void MoveBy(const ::dx::XMFLOAT2& offset) noexcept
+        void MoveBy(const dx::XMFLOAT2& offset) noexcept
         {
             m_pos_.x += offset.x;
             m_pos_.y += offset.y;
         }
-        void MoveTo(const ::dx::XMFLOAT2& pos) noexcept
+        void MoveTo(const dx::XMFLOAT2& pos) noexcept
         {
             m_pos_ = pos;
         }
@@ -104,9 +104,9 @@ export namespace starfield::view
     private:
         FATSPACE_D2D::Graphics& m_gfx_;
 
-        ::dx::XMFLOAT2 m_pos_{ 0.0f, 0.0f };
+        dx::XMFLOAT2 m_pos_{ 0.0f, 0.0f };
 
-        const ::dx::XMFLOAT2 m_offset_
+        const dx::XMFLOAT2 m_offset_
         {
             m_gfx_.GetWidth<float>()  / 2.0f,
             m_gfx_.GetHeight<float>() / 2.0f
