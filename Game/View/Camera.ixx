@@ -50,7 +50,7 @@ export namespace starfield::view
             return m_pos_;
         }
 
-        auto GetViewportRect(const FATSPACE_D2D::Graphics& gfx) const noexcept -> FATSPACE_MATH::Rect<float>
+        auto GetViewportRect(const FATSPACE_D2D::Graphics& gfx) const noexcept -> FATSPACE_MATH::geometry::Rect<float>
         {
             const auto& zoom = 1.0f / m_scale_;
 
@@ -60,7 +60,7 @@ export namespace starfield::view
                 FATSPACE_MATH::Square(m_gfx_.GetHeight<float>() / 2.0f * zoom)
             );
 
-            return FATSPACE_MATH::Rect<float>::FromCenter(
+            return FATSPACE_MATH::geometry::Rect<float>::FromCenter(
                 m_pos_.x,
                 m_pos_.y,
                 diagonal,

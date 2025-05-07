@@ -32,7 +32,7 @@ export namespace starfield::entity
 
             RadiusPack radiuses;
 
-            ::D2D1_COLOR_F color;
+            D2D1_COLOR_F color;
 
             std::size_t flareCount;
 
@@ -104,9 +104,9 @@ export namespace starfield::entity
 
 
     public:
-        virtual auto GetBoundingRect() const noexcept -> FATSPACE_MATH::Rect<float> override final
+        virtual auto GetBoundingRect() const noexcept -> FATSPACE_MATH::geometry::Rect<float> override final
         {
-            return FATSPACE_MATH::Rect<float>::FromCenter(
+            return FATSPACE_MATH::geometry::Rect<float>::FromCenter(
                 m_desc_.position.x,
                 m_desc_.position.y,
                 m_desc_.radiuses.outer_radius,
@@ -172,7 +172,7 @@ export namespace starfield::entity
 
 
     private:
-        auto GetFadedColor_() const noexcept -> ::D2D1_COLOR_F
+        auto GetFadedColor_() const noexcept -> D2D1_COLOR_F
         {
             return m_faded_color_;
         }
@@ -185,6 +185,6 @@ export namespace starfield::entity
 
         Descriptor m_desc_;
 
-        ::D2D1_COLOR_F m_faded_color_;
+        D2D1_COLOR_F m_faded_color_;
     };
 }

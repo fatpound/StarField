@@ -78,14 +78,14 @@ export namespace starfield
 
             std::vector<Color_t> m_colors =
             {
-                ::D2D1::ColorF{ ::D2D1::ColorF::Red        },
-                ::D2D1::ColorF{ ::D2D1::ColorF::Green      },
-                ::D2D1::ColorF{ ::D2D1::ColorF::Blue       },
-                ::D2D1::ColorF{ ::D2D1::ColorF::Cyan       },
-                ::D2D1::ColorF{ ::D2D1::ColorF::Yellow     },
-                ::D2D1::ColorF{ ::D2D1::ColorF::Magenta    },
-                ::D2D1::ColorF{ ::D2D1::ColorF::SandyBrown },
-                ::D2D1::ColorF{ ::D2D1::ColorF::Crimson    }
+                D2D1::ColorF{ D2D1::ColorF::Red        },
+                D2D1::ColorF{ D2D1::ColorF::Green      },
+                D2D1::ColorF{ D2D1::ColorF::Blue       },
+                D2D1::ColorF{ D2D1::ColorF::Cyan       },
+                D2D1::ColorF{ D2D1::ColorF::Yellow     },
+                D2D1::ColorF{ D2D1::ColorF::Magenta    },
+                D2D1::ColorF{ D2D1::ColorF::SandyBrown },
+                D2D1::ColorF{ D2D1::ColorF::Crimson    }
             };
         };
 

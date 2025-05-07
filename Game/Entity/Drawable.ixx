@@ -27,7 +27,7 @@ export namespace starfield::entity
 
 
     public:
-        virtual auto GetBoundingRect() const -> FATSPACE_MATH::Rect<float> = 0;
+        virtual auto GetBoundingRect() const -> FATSPACE_MATH::geometry::Rect<float> = 0;
 
         virtual void ApplyTransformation(const dx::XMMATRIX& transformer) = 0;
         virtual void UpdateTo(const float total_time) = 0;
