@@ -156,7 +156,6 @@
     <ClCompile Include="Entity\Star\Star.ixx" />
     <ClCompile Include="Game.ixx" />
     <ClCompile Include="StarFactory.ixx" />
-    <ClCompile Include="View\Camera.cxx" />
     <ClCompile Include="View\Camera.ixx" />
     <ClCompile Include="View\CameraController.ixx" />
     <ClCompile Include="View\View.ixx" />
