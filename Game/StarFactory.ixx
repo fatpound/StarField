@@ -1,10 +1,10 @@
 module;
 
-#include <DirectXMath.h>
-
 #include <d2d1.h>
 
 export module StarField.StarFactory;
+
+import <DirectXMath.h>;
 
 import StarField.Entity.Star;
 

@@ -2,9 +2,9 @@ module;
 
 #include <FatNamespaces.hpp>
 
-#include <DirectXMath.h>
-
 export module StarField.Entity.Drawable;
+
+import <DirectXMath.h>;
 
 import FatPound;
 

@@ -4,9 +4,9 @@ module;
 
 #include <d2d1.h>
 
-#include <DirectXMath.h>
-
 export module StarField.View.Camera;
+
+import <DirectXMath.h>;
 
 import FatPound;
 
