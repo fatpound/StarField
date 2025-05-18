@@ -1,6 +1,6 @@
 module;
 
-#include <FatNamespaces.hpp>
+#include <FatNamespaces.hxx>
 
 #include <d2d1.h>
 
