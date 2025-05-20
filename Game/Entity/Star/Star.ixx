@@ -2,10 +2,9 @@ module;
 
 #include <FatNamespaces.hxx>
 
-#include <d2d1.h>
-
 export module StarField.Entity.Star;
 
+import <d2d1.h>;
 import <DirectXMath.h>;
 
 import StarField.Entity.Drawable;

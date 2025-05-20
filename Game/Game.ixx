@@ -2,12 +2,9 @@ module;
 
 #include <FatNamespaces.hxx>
 
-#include <FatWin32.hpp>
-
-#include <d2d1.h>
-
 export module StarField;
 
+import <d2d1.h>;
 import <DirectXMath.h>;
 
 import StarField.Entity;

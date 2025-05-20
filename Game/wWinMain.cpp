@@ -3,7 +3,8 @@
 /*          */
 
 #include <FatNamespaces.hxx>
-#include <FatWin32.hpp>
+
+import <FatWin32.hxx>;
 
 import FatPound;
 import StarField;
