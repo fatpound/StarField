@@ -46,7 +46,7 @@ int APIENTRY wWinMain(
     }
     catch (const std::exception& ex)
     {
-        ::MessageBox(nullptr, FATSPACE_UTIL::ToWString(ex.what()).c_str(), L"Error!", MB_OK | MB_ICONERROR);
+        ::MessageBox(nullptr, FATSPACE_UTILITY::ToWString(ex.what()).c_str(), L"Error!", MB_OK | MB_ICONERROR);
     }
     catch (...)
     {

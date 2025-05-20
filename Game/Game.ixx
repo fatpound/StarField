@@ -124,7 +124,7 @@ export namespace starfield
         FATSPACE_WIN32::WindowEx m_wnd_;
         FATSPACE_D2D::Graphics m_gfx_;
 
-        FATSPACE_UTIL::Timer m_timer_;
+        FATSPACE_UTILITY::Timer m_timer_;
 
         view::Camera m_camera_;
         view::CameraController m_camera_controller_;
