@@ -34,8 +34,8 @@ export namespace starfield
     public:
         explicit Game(const Settings& settings = {})
             :
-            m_wnd_{ std::make_shared<FATSPACE_WIN32::WndClassEx>(L"fat->pound WindowClassEx: " + std::to_wstring(s_game_id_++)), L"StarField " + std::to_wstring(s_game_id_), FATSPACE_UTIL_GFX::SizePack{ ScreenWidth, ScreenHeight } },
-            m_gfx_{ m_wnd_.GetHandle(), FATSPACE_UTIL_GFX::SizePack{ m_wnd_.GetClientWidth<UINT>(), m_wnd_.GetClientHeight<UINT>() } },
+            m_wnd_{ std::make_shared<FATSPACE_WIN32::WndClassEx>(L"fat->pound WindowClassEx: " + std::to_wstring(s_game_id_++)), L"StarField " + std::to_wstring(s_game_id_), FATSPACE_UTILITY_GFX::SizePack{ ScreenWidth, ScreenHeight } },
+            m_gfx_{ m_wnd_.GetHandle(), FATSPACE_UTILITY_GFX::SizePack{ m_wnd_.GetClientWidth<UINT>(), m_wnd_.GetClientHeight<UINT>() } },
             m_camera_{ m_gfx_ },
             m_camera_controller_{ m_camera_, *m_wnd_.m_pMouse, *m_wnd_.m_pKeyboard },
             m_drawables_{ StarFactory<>{settings}.GetStars() },

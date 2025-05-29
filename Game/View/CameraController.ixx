@@ -57,7 +57,7 @@ export namespace starfield::view
 
                 switch (mouseE->type)
                 {
-                case FATSPACE_IO::MouseEvent::Type::LPress:
+                case FATSPACE_IO::Mouse::Event::Type::LPress:
                 {
                     engaged_ = true;
                     m_last_pos_ = dx::XMFLOAT2
@@ -68,15 +68,15 @@ export namespace starfield::view
                 }
                 break;
 
-                case FATSPACE_IO::MouseEvent::Type::LRelease:
+                case FATSPACE_IO::Mouse::Event::Type::LRelease:
                     engaged_ = false;
                     break;
 
-                case FATSPACE_IO::MouseEvent::Type::WheelUp:
+                case FATSPACE_IO::Mouse::Event::Type::WheelUp:
                     m_camera_.SetScale(m_camera_.GetScale() * zoomFactor_);
                     break;
 
-                case FATSPACE_IO::MouseEvent::Type::WheelDown:
+                case FATSPACE_IO::Mouse::Event::Type::WheelDown:
                     m_camera_.SetScale(m_camera_.GetScale() / zoomFactor_);
                     break;
 
