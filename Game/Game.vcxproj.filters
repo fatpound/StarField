@@ -39,7 +39,7 @@
     <ClCompile Include="StarFactory.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="wWinMain.cpp">
+    <ClCompile Include="wWinMain.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

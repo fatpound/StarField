@@ -159,7 +159,7 @@
     <ClCompile Include="View\Camera.ixx" />
     <ClCompile Include="View\CameraController.ixx" />
     <ClCompile Include="View\View.ixx" />
-    <ClCompile Include="wWinMain.cpp" />
+    <ClCompile Include="wWinMain.cxx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FatModules\FatModules.vcxproj">
