@@ -39,7 +39,10 @@
     <ClCompile Include="StarFactory.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="wWinMain.cxx">
+    <ClCompile Include="wWinMain.c++">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="View\Rectangle.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

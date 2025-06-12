@@ -103,9 +103,9 @@ export namespace starfield::entity
 
 
     public:
-        virtual auto GetBoundingRect() const noexcept -> FATSPACE_MATH::geometry::Rect<float> override final
+        virtual auto GetBoundingRect() const noexcept -> view::Rect<float> override final
         {
-            return FATSPACE_MATH::geometry::Rect<float>::FromCenter(
+            return view::Rect<float>::FromCenter(
                 m_desc_.position.x,
                 m_desc_.position.y,
                 m_desc_.radiuses.outer_radius,
@@ -158,9 +158,7 @@ export namespace starfield::entity
         }
         auto IsWithinArea(const dx::XMFLOAT2& position, const float radius) const noexcept -> bool
         {
-            using FATSPACE_MATH::operator -;
-
-            const auto& distance  = this->GetPos() - position;
+            const auto& distance  = FATSPACE_GEOMETRY::Distance(this->GetPos(), position);
             const auto& maxradsum = this->GetMaxRadius() + radius;
 
             return maxradsum > distance;
