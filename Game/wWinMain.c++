@@ -2,9 +2,9 @@
 // fatpound //
 /*          */
 
-#include <FatNamespaces.hxx>
+#include <_macros/Namespaces.hxx>
 
-import <FatWin32.hxx>;
+import <Win32_/WinAPI.hxx>;
 
 import FatPound;
 import StarField;

@@ -1,6 +1,6 @@
 module;
 
-#include <FatNamespaces.hxx>
+#include <_macros/Namespaces.hxx>
 
 export module StarField;
 
