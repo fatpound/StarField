@@ -15,12 +15,12 @@ import FatPound;
 
 import std;
 
-#if IN_RELEASE
-#define ScreenWidth  static_cast<UINT>(::GetSystemMetrics(SM_CXSCREEN))
-#define ScreenHeight static_cast<UINT>(::GetSystemMetrics(SM_CYSCREEN))
+#ifdef IN_RELEASE
+    #define ScreenWidth  static_cast<UINT>(::GetSystemMetrics(SM_CXSCREEN))
+    #define ScreenHeight static_cast<UINT>(::GetSystemMetrics(SM_CYSCREEN))
 #else
-static constexpr UINT ScreenWidth  = 800U;
-static constexpr UINT ScreenHeight = 600U;
+    static constexpr UINT ScreenWidth  = 800U;
+    static constexpr UINT ScreenHeight = 600U;
 #endif
 
 namespace dx = DirectX;
