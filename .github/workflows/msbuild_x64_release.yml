@@ -1,0 +1,33 @@
+name: MSBuild -- x64 -- Release
+
+
+on:
+  push:
+    branches:
+      - master
+      
+  pull_request:
+    branches:
+      - master
+    
+
+permissions:
+  contents: read
+
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        token: ${{ secrets.FATPOUND_ACCESS_TOKEN }}
+
+    - name: Add MSBuild to PATH
+      uses: microsoft/setup-msbuild@v2
+
+    - name: Build .vcxproj
+      run: msbuild StarRealm.sln /p:Configuration=Release /p:Platform=x64 /v:minimal
