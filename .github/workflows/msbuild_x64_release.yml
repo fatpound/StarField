@@ -30,4 +30,4 @@ jobs:
       uses: microsoft/setup-msbuild@v2
 
     - name: Build .vcxproj
-      run: msbuild StarRealm.sln /p:Configuration=Release /p:Platform=x64 /v:minimal
+      run: msbuild StarField.sln /p:Configuration=Release /p:Platform=x64 /v:minimal
