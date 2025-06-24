@@ -51,7 +51,7 @@ export namespace starfield::view
             return m_pos_;
         }
 
-        auto GetViewportRect(const FATSPACE_D2D::Graphics& gfx) const noexcept -> view::Rect<float>
+        auto GetViewportRect() const noexcept -> view::Rect<float>
         {
             const auto& zoom = 1.0f / m_scale_;
 

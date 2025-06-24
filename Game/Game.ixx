@@ -99,7 +99,7 @@ export namespace starfield
         void DoFrame_()
         {
             const auto& matrix = m_camera_.GetMatrix();
-            const auto& viewport = m_camera_.GetViewportRect(m_gfx_);
+            const auto& viewport = m_camera_.GetViewportRect();
 
             for (auto& drawable : m_drawables_)
             {
