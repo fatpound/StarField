@@ -4,7 +4,7 @@ module;
 
 export module StarField;
 
-import <d2d1.h>;
+import <d2d1_3.h>;
 import <DirectXMath.h>;
 
 import StarField.Entity;
